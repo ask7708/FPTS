@@ -8,6 +8,7 @@ public class TestClass {
 		System.out.println("Hello Daniel!");
 		System.out.println("There should be a conflict here.");
 		System.out.println("Hello Arsh!");
+		System.out.println("Not Dan C");
 	}
 
 }
