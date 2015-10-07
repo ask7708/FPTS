@@ -22,6 +22,6 @@ public abstract class View {
    // may be necessary to have all views to be set up in a default
    // kind of way (leaving blank for now until we know what should be set
    // for all Views when they are instantiated
-   public View(Portfolio portfolio) { }
+   public View() { }
    
 }
