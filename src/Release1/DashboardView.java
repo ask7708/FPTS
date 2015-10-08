@@ -1,8 +1,11 @@
 package Release1;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,13 +28,25 @@ public class DashboardView extends View {
       JLabel helloText = new JLabel("Hello");
       JLabel firstNameFaild = new JLabel(portfolio.getUserFName());
       JLabel lastNameFalid = new JLabel(portfolio.getUserLName());
-      //helloText.setHorizontalAlignment(10);;
-      helloText.setBounds(30,40,280,30);
+      //helloText.setBounds(150, 50, 80, 25);
+      JButton logoutButton = new JButton("Log Out!");
       top.add(helloText);
-      top.add(lastNameFalid, BorderLayout.WEST);
+      top.add(firstNameFaild);
+      top.add(lastNameFalid);
+      top.add(logoutButton);
+      /**********************************************************************/
+      Dimension d = new Dimension(100,100);
+      JPanel center = new JPanel();
       
-
-      
+      JButton viewAccountButton  = new JButton("View Your Account");
+      viewAccountButton.setSize(d);  
+      JButton manageHoldingButton = new JButton("Manage Your Holding");
+      manageHoldingButton.setSize(d);
+      JButton managePortfolioButton = new JButton("Manage Your Portfolio");
+      managePortfolioButton.setSize(d);
+      center.add(viewAccountButton);
+      center.add(manageHoldingButton);
+      center.add(managePortfolioButton);
       
       /**
       JPanel center = new JPanel();
@@ -39,8 +54,8 @@ public class DashboardView extends View {
       center.add(helloTex);
       **/
       
-      this.screen.add(top); 
-     // this.screen.add(center);
+      //this.screen.add(top ); 
+      this.screen.add(center);
       screen.setSize(400, 600);
 
    }
