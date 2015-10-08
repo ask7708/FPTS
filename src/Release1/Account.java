@@ -38,7 +38,7 @@ public abstract class Account {
 		
 		this.accountName = accountName;
 		this.amount = amount;
-		this.date = date;
+		this.setDate(date);
 		
 	}
 
@@ -77,6 +77,24 @@ public abstract class Account {
 	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	/**
+	 * Returns the date the account was added 
+	 * 
+	 * @return date
+	 */
+	public LocalDate getDate() {
+		return date;
+	}
+
+	/**
+	 * Set the date the account was added
+	 * 
+	 * @param date
+	 */
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	
