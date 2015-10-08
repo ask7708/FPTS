@@ -24,7 +24,7 @@ public abstract class Account {
 	/**
 	 * The date the type of account was added
 	 */
-	private Date date;
+	private LocalDate date;
 	
 	/**
 	 * Creates an account object with the name, initial amount, 
@@ -34,7 +34,7 @@ public abstract class Account {
 	 * @param amount
 	 * @param date
 	 */
-	public Account(String accountName, int amount, Date date){
+	public Account(String accountName, int amount, LocalDate date){
 		
 		this.accountName = accountName;
 		this.amount = amount;
