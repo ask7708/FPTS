@@ -9,7 +9,6 @@ import java.util.Observable;
  *
  */
 
-
 public class Portfolio extends Observable {
 
    private User user;
@@ -21,5 +20,13 @@ public class Portfolio extends Observable {
       this.user = user;
       this.holdings = new ArrayList<Holding>();
    }
+   
+   public String getUsername() { return user.getUsername(); }
+   
+   public String getUserFName() { return user.getFirstName(); }
+   
+   public String getUserLName() { return user.getLastName(); } 
+   
+   
    
 }
