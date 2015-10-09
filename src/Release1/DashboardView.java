@@ -1,6 +1,7 @@
 package Release1;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
@@ -54,8 +55,9 @@ public class DashboardView extends View {
       center.add(helloTex);
       **/
       
-      //this.screen.add(top ); 
-      this.screen.add(center);
+	  Container pane = screen.getContentPane();
+	  pane.add(top, BorderLayout.NORTH);
+	  pane.add(center, BorderLayout.CENTER);
       screen.setSize(400, 600);
 
    }
