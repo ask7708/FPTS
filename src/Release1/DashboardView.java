@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -54,10 +56,21 @@ public class DashboardView extends View {
       JLabel helloTex = new JLabel("Hello");
       center.add(helloTex);
       **/
+      ////////////////////////////////////////////////////////
+      JPanel bottom = new JPanel();
+      Date date = new Date();
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+      JLabel dateNow = new JLabel(sdf.format(date));
+      
+      bottom.add(dateNow);
+      
+      
       
 	  Container pane = screen.getContentPane();
 	  pane.add(top, BorderLayout.NORTH);
 	  pane.add(center, BorderLayout.CENTER);
+	  pane.add(bottom, BorderLayout.SOUTH);
+	  
       screen.setSize(400, 600);
 
    }
