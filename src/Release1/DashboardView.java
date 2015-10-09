@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,6 +53,48 @@ public class DashboardView extends View {
       center.add(manageHoldingButton);
       center.add(managePortfolioButton);
       
+      viewAccountButton.addActionListener(new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+		    JFrame frame = new JFrame();
+		    frame.setVisible(true);
+			frame.setSize(400, 600);
+		}
+    	  
+      });
+      manageHoldingButton.addActionListener(new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+		    JFrame frame = new JFrame();
+		    frame.setVisible(true);
+			frame.setSize(400, 600);
+		}
+    	  
+      });
+      managePortfolioButton.addActionListener(new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+		    JFrame frame = new JFrame();
+		    frame.setVisible(true);
+			frame.setSize(400, 600);
+		}
+    	  
+      });
+      
+      
+      
+   
+   
+    	  
+      /***/
+      
+      /***/
+      
+      
+       
       /**
       JPanel center = new JPanel();
       JLabel helloTex = new JLabel("Hello");
@@ -61,9 +105,8 @@ public class DashboardView extends View {
       Date date = new Date();
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
       JLabel dateNow = new JLabel(sdf.format(date));
-      
       bottom.add(dateNow);
-      
+      ////////////////////////////////////////////////////////
       
       
 	  Container pane = screen.getContentPane();
