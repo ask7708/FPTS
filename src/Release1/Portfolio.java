@@ -27,6 +27,14 @@ public class Portfolio extends Observable {
    
    public String getUserLName() { return user.getLastName(); } 
    
+   /**
+    * Returns a copy of the holding the portfolio has 
+    * (I went with a copy so that holdings of the portfolio aren't affected when
+    * simulations are being done)
+    * @return a copy of the portfolio's holdings
+    */
+   public ArrayList<Holding> getHoldings() { return new ArrayList<Holding>(holdings); }
+   
    
    
 }
