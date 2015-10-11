@@ -98,8 +98,7 @@ public abstract class Account {
 	}
 	
 	
-	/* Testing some methods within account class
-	 * ***DO NOT ERASE***
+	/*
 	public static void main(String args[]){
 		
 		
@@ -107,6 +106,6 @@ public abstract class Account {
 		System.out.println(randomDate.getMonth()+" "+randomDate.getDayOfMonth()+" "+randomDate.getYear());
 		
 		
-	}
-	*/
+	}*/
+	
 }
