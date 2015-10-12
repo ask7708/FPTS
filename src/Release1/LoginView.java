@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,66 +16,67 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 
-public class LoginView extends JFrame {
-   
-   /**
-    * Creates the login screen that will first be displayed when the
-    * application is first started
-    */
-    private static final long serialVersionUID = 1L;
-    private JPanel cardPanel, loginPanel, registerPanel, mainPanel;
-    private JLabel dahboardLabel;
-    private JButton loginboardButton;
-    private CardLayout cardLayout = new CardLayout();
-    public LoginView() {
-			      
-	cardPanel = new JPanel();
-	mainPanel = new JPanel();
-	cardPanel.setLayout(cardLayout);
-			      
-		  loginPanel = new JPanel();
-		  registerPanel = new JPanel();
+public class LoginView extends View {
 
-		
-		
-		  cardPanel.add(loginPanel, "1");
+	/**
+	 * Creates the login screen that will first be displayed when the
+	 * application is first started
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel cardPanel, loginPanel, registerPanel, mainPanel;
+	private JLabel dahboardLabel;
+	private JButton loginboardButton;
+	private CardLayout cardLayout = new CardLayout();
 
-		  
-		  loginboardButton = new JButton("Login");
-	  
-	     
- 
+	User theUserModel;
+	
+	public LoginView() {
+
+		cardPanel = new JPanel();
+		mainPanel = new JPanel();
+		cardPanel.setLayout(cardLayout);
+
+		loginPanel = new JPanel();
+		registerPanel = new JPanel();
+
+		cardPanel.add(loginPanel, "1");
+
+		loginboardButton = new JButton("Login");
+
 		JLabel userLabel = new JLabel("User");
 		loginPanel.add(userLabel);
 
-		JTextField userText = new JTextField(20);
+		final JTextField userText = new JTextField(20);
 		loginPanel.add(userText);
 		JLabel passwordLabel = new JLabel("Password");
 		loginPanel.add(passwordLabel);
-		JPasswordField passwordText = new JPasswordField(20);
+		final JPasswordField passwordText = new JPasswordField(20);
 		loginPanel.add(passwordText);
-
 		
-		 loginboardButton.addActionListener(new ActionListener() {	  
-	     public void actionPerformed(ActionEvent e) {
-	              cardLayout.show(cardPanel, "1");
-	     }
-	     });
-	      
-	      
-	      
-	      	      
-	      mainPanel.add(loginboardButton);
-	      
-	      add(cardPanel);
-	      add(mainPanel, BorderLayout.SOUTH);
-	      setSize(250, 250);
-   }
-   
-  public static void main(String[] args) {
-   
-     LoginView login = new LoginView();
-     login.setVisible(true);
-  }
-  
+		
+		
+		loginboardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "1");
+				String tempPassword = new String(passwordText.getPassword());
+				String tempName = userText.getText();
+				System.out.println(tempName);
+				//theUserModel.auth(tempName, tempPassword);
+				
+			}
+		});
+
+		mainPanel.add(loginboardButton);
+
+		this.screen.add(cardPanel);
+		this.screen.add(mainPanel, BorderLayout.SOUTH);
+		this.screen.setSize(250, 250);
+	}
+
+	public static void main(String[] args) {
+
+		LoginView login = new LoginView();
+		login.show();
+	}
+
 }
