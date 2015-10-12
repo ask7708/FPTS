@@ -3,6 +3,9 @@ package Release1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -17,6 +20,10 @@ public class Login {
  
         String name = "itnks,12345";
         String pass = "12345";
+        String[][] account;
+        List<String> where = new ArrayList<String>();
+        
+        
         
         File f = new File("users.txt");
         Scanner numScan = new Scanner(f);
@@ -25,11 +32,33 @@ public class Login {
          
         while (numScan.hasNext())
         {
-            line = numScan.next();
-            System.out.print(line);
-         
-            }
+            line = numScan.nextLine();
+            line.split(",");
+            where.add(line);
+         }
+        String listString="";
+
+        for (String s : where)
+        {
+            listString += s + ",";
         }
+        
+        String str = "...";
+        List<String> elephantList = Arrays.asList(listString.split(","));
+        System.out.println(elephantList);
+        String[] names;
+        String[] passwords;
+        
+        for(int i = 0; i < elephantList.length(); i++ ){
+        	if((i%2)==0){
+        		names.add(elephantList.get(i));
+        		
+        	}
+        }
+        
+        
+                
+	}
 		
 
-}}
+}
