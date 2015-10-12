@@ -1,8 +1,6 @@
 package Release1;
 import java.util.Date;
 
-import javax.swing.TransferHandler.TransferSupport;
-
 public abstract class Transaction {
 	/**
 	 * the date and time the transaction was made
