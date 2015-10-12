@@ -1,5 +1,9 @@
 package Release1;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class User {
    
    /**
@@ -29,6 +33,8 @@ public class User {
     */
    private Portfolio portfolio;
 
+   
+   
    public User(String name, String password) {
       
       this.username = name;
@@ -80,4 +86,29 @@ public class User {
     * @return the user's username
     */
    protected String getUsername() { return this.username; }
+   
+   
+   public boolean auth(String username, String passwoard) throws FileNotFoundException{
+       String name = "itnks,12345";
+       String pass = "12345";
+       
+       File f = new File("users.txt");
+       Scanner numScan = new Scanner(f);
+        
+       String line;
+        
+       while (numScan.hasNext())
+       {
+           line = numScan.next();
+           System.out.print(line);
+           if (line == name){
+           	return true;
+           }else{
+           	return false;
+           }
+       }
+	return false;
+
+	}
+
 }
