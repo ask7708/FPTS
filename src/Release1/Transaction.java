@@ -12,13 +12,16 @@ public abstract class Transaction {
 	private Object reciever;
 	private Object transfer;
 	
-	public Transaction(Date time, int amount, Object reciever,Object transfer){
+	public Transaction(Date time, int amount, Object reciever,Object transfer) throws CashException{
 		time = this.time;
 		amount = this.cash;
 		reciever = this.reciever;
 		transfer = this.transfer;
 		
 		if(transfer instanceof Account){
+			if(((Account) transfer).getAmount() < cash){
+				throw new CashException();
+			}
 			if(reciever instanceof Equity){
 				AccountToEquity();
 			}
@@ -27,6 +30,11 @@ public abstract class Transaction {
 			}
 		}
 		else{
+			Equity transfers = (Equity) transfer;
+			double total = transfers.getAcquiredShares() * transfers.getSharePrice();
+			if(total < cash){
+				throw new CashException();
+			}
 			EquityToAccount();
 		}
 		
