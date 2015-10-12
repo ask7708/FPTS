@@ -44,7 +44,7 @@ public abstract class Account {
 	 * @param amount
 	 * @param date
 	 */
-	public Account(String accountName, int amount, LocalDate date, int accountNum, int routingNum){
+	public Account(String accountName, double amount, LocalDate date, int accountNum, int routingNum){
 		
 		this.accountName = accountName;
 		this.amount = amount;

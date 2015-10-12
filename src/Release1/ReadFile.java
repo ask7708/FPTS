@@ -50,14 +50,30 @@ public class ReadFile {
         		}
         	else{
         		if(temp[0].charAt(1) == 'T'){
-        			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        			LocalDate temp5 = LocalDate.parse(temp[5], formatter);
-        			double temp3 = Double.parseDouble(temp[3]);
-        			int temp4 = Integer.parseInt(temp[4]);
-        			int temp6 = Integer.parseInt(temp[6]);
-        			Transaction TransactionInfo = new Transaction(temp5, temp6, (Object)AccountData.get(0), (Object)AccountData.get(0));
+        			if(temp[1] instanceof String){
+        				
+        			}
+        			else{
+        				
+        			}
         		}
         		else{
+        			String temp1 = temp[1];
+        			double temp2 = Double.parseDouble(temp[2]);
+        			int temp3 = Integer.parseInt(temp[3]);
+        			int temp4 = Integer.parseInt(temp[4]);
+        			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        			LocalDate temp5 = LocalDate.parse(temp[5], formatter);
+        			
+        			Account AccountInfo = null;
+        			if(temp[0] == "!MM"){
+        				AccountInfo = new MarketAccount(temp1, temp2, temp5, temp4, temp3);
+        			}
+        			else{
+        				AccountInfo = new BankAccount(temp1, temp2, temp5, temp4, temp3);
+        			}
+        			AccountData.add(AccountInfo);
+        			
         			
         		}
         	}
