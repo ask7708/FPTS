@@ -23,73 +23,52 @@ public class LoginView extends JFrame {
     */
     private static final long serialVersionUID = 1L;
     private JPanel cardPanel, loginPanel, registerPanel, mainPanel;
-    private JLabel dahboardLabel, registerLabel;
-    private JButton loginboardButton, registerButton;
+    private JLabel dahboardLabel;
+    private JButton loginboardButton;
     private CardLayout cardLayout = new CardLayout();
-   public LoginView() {
-	      
-	      cardPanel = new JPanel();
-	      mainPanel = new JPanel();
-	      cardPanel.setLayout(cardLayout);
-	      
-	      loginPanel = new JPanel();
-	      registerPanel = new JPanel();
-	    
-	      dahboardLabel = new JLabel("");
-	      registerLabel = new JLabel("Register");
+    public LoginView() {
+			      
+	cardPanel = new JPanel();
+	mainPanel = new JPanel();
+	cardPanel.setLayout(cardLayout);
+			      
+		  loginPanel = new JPanel();
+		  registerPanel = new JPanel();
 
-	      
-	      loginPanel.add(dahboardLabel);
-	      registerPanel.add(registerLabel);
+		
+		
+		  cardPanel.add(loginPanel, "1");
 
-
-	      cardPanel.add(loginPanel, "1");
-	      cardPanel.add(registerPanel, "2");
-	      
-	      loginboardButton = new JButton("Login");
-	      
+		  
+		  loginboardButton = new JButton("Login");
+	  
 	     
  
-			JLabel userLabel = new JLabel("User");
-			loginPanel.add(userLabel);
+		JLabel userLabel = new JLabel("User");
+		loginPanel.add(userLabel);
 
-			JTextField userText = new JTextField(20);
-			loginPanel.add(userText);
+		JTextField userText = new JTextField(20);
+		loginPanel.add(userText);
+		JLabel passwordLabel = new JLabel("Password");
+		loginPanel.add(passwordLabel);
+		JPasswordField passwordText = new JPasswordField(20);
+		loginPanel.add(passwordText);
 
-			JLabel passwordLabel = new JLabel("Password");
-			loginPanel.add(passwordLabel);
-
-			JPasswordField passwordText = new JPasswordField(20);
-			loginPanel.add(passwordText);
-
-			JButton loginButton = new JButton("login");
-			loginPanel.add(loginButton);
-	      
-			loginboardButton.addActionListener(new ActionListener() {
-	    	  
-	          public void actionPerformed(ActionEvent e) {
+		
+		 loginboardButton.addActionListener(new ActionListener() {	  
+	     public void actionPerformed(ActionEvent e) {
 	              cardLayout.show(cardPanel, "1");
-	          }
-	      });
+	     }
+	     });
 	      
 	      
 	      
-	      
-	      
-	      registerButton = new JButton("Register");
-	      registerButton.addActionListener(new ActionListener() {
-
-	          public void actionPerformed(ActionEvent e) {
-	              cardLayout.show(cardPanel, "2");
-	          }
-	      });
-	      
-	      
+	      	      
 	      mainPanel.add(loginboardButton);
-	      mainPanel.add(registerButton);
+	      
 	      add(cardPanel);
 	      add(mainPanel, BorderLayout.SOUTH);
-	      setSize(600, 600);
+	      setSize(250, 250);
    }
    
   public static void main(String[] args) {
