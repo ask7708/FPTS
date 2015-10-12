@@ -1,5 +1,6 @@
 package Release1;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class Simulation {
@@ -61,7 +62,7 @@ public class Simulation {
       this.simType = type;
       this.amount = length;
       this.interval = iType;
-      this.percentage = percent;
+      this.percentage = percent / 100;
       
       this.startDate = null;
       this.endDate = null;
@@ -108,55 +109,111 @@ public class Simulation {
     */
    public double getNewPVal() { return this.portfolioValAfter; }
    
-   /**
-    * 
-    * @param holding
-    */
+//   /**
+//    * 
+//    * @param holding
+//    */
+//   public void addInterestEarned(Equity holding) {
+//      
+//      double rate = 0;
+//      DecimalFormat df = new DecimalFormat("#.###");
+//      
+//      switch(interval) {
+//      
+//         case DAY:
+//            rate = Math.round(((percentage / 100.0) / 365.0)*1000d)/1000d;
+//            System.out.println("The rate is: " + rate);
+//            break;
+//         case MONTH:
+//            rate = Math.round(((percentage / 100.0) / 12.0)*1000d)/1000d;
+//            System.out.println("The month rate is: " + rate);
+//            break;
+//         case YEAR:
+//            rate = (percentage / 100.0);
+//            break;  
+//      }
+//      
+//      if(simType == SimulationType.NONE)
+//         return;
+//      
+//      else if(simType == SimulationType.BULL) {
+//         
+//         int steps = amount;
+//         
+//         while(steps != 0) {
+//            
+//            double p = holding.getSharePrice();
+//            double inc = p * rate;
+//            holding.setSharePrice(p + inc);
+//            steps--;
+//         }
+//      }
+//      
+//      else {
+//         
+//         int steps = amount;
+//         
+//         while(steps != 0) {
+//            
+//            double p = holding.getSharePrice();
+//            double dec = p * rate;
+//            holding.setSharePrice(p - dec);
+//            steps--;
+//         }
+//      }
+//   }
+   
    public void addInterestEarned(Equity holding) {
       
-      double rate = 0;
+      double time = 0;
+      double intrst = 0;
+      double price = holding.getSimulationPrice();
+      double newPrice = price;
+      int steps = amount;
       
       switch(interval) {
       
          case DAY:
-            rate = (percentage / 100.0) / 365;
+            time = amount / 365.0;
             break;
          case MONTH:
-            rate = (percentage / 100.0) / 12;
+            time = amount / 12.0;
             break;
          case YEAR:
-            rate = (percentage / 100.0);
-            break;  
+            time = amount;
+            break;
       }
       
-      if(simType == SimulationType.NONE)
-         return;
-      
-      else if(simType == SimulationType.BULL) {
+      switch(simType) {
          
-         int steps = amount;
-         
-         while(steps != 0) {
+         case NONE:
+            return;
             
-            double p = holding.getSharePrice();
-            double inc = p * rate;
-            holding.setSharePrice(p + inc);
-            steps--;
-         }
-      }
-      
-      else {
-         
-         int steps = amount;
-         
-         while(steps != 0) {
+         case BEAR:
+            intrst = price * percentage * time;
+            steps = amount;
             
-            double p = holding.getSharePrice();
-            double dec = p * rate;
-            holding.setSharePrice(p - dec);
-            steps--;
-         }
+            while(steps != 0) { 
+               
+               newPrice -= ((1.0/amount) * intrst);
+               steps--;
+            }
+            
+            holding.addPriceChange(newPrice);
+            break;
+            
+         case BULL:
+            intrst = price * percentage * time;
+            steps = amount;
+            
+            while(steps != 0) {
+               
+               newPrice += ((1.0/amount) * intrst);
+               steps--;
+            }
+            
+            holding.addPriceChange(newPrice);
+            break;
       }
    }
-   
 }

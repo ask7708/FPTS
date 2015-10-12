@@ -4,6 +4,7 @@
 package Release1;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * @author Arshdeep Khalsa, 
@@ -37,6 +38,8 @@ public class Equity {
 	 */
 	private double eqPrice;
 	
+	private Stack<Double> priceChanges;
+	
 	/**
 	 * The non-default constructor. Creates an equity with a name
 	 * and ticker symbol.
@@ -51,7 +54,7 @@ public class Equity {
 		this.eqPrice = eqPrice;
 		
 		this.indexOrSec = new ArrayList<String>();
-		
+		this.priceChanges = null;
 	}
 
 	/**
@@ -137,6 +140,33 @@ public class Equity {
 		return acquiredShares;
 	}
 
+	public void setForSimulation() { this.priceChanges = new Stack<Double>(); }
+	
+	public void addPriceChange(double newPrice) {
+	   
+	   this.priceChanges.push(newPrice);
+	}
+	
+	public void removePriceChange() { 
+	   
+	   if(this.priceChanges != null) {
+	      
+	      if(!this.priceChanges.empty())
+	         this.priceChanges.pop(); 
+	   }
+	}
+	
+	public double getSimulationPrice() {
+	   
+	   if(this.priceChanges != null) {
+	      
+	      if(!this.priceChanges.empty())
+	         return priceChanges.peek();
+	   }
+	   
+	   return this.eqPrice;
+	}
+	
 	/**
 	 * Sets the number of shares acquired
 	 * @param acquiredShares
