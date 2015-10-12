@@ -22,6 +22,7 @@ import javax.swing.JTextArea;
 
 public class DashboardView extends View {
 
+
 	/**
 	 * Creates the application's dashboard view
 	 * 
@@ -33,6 +34,7 @@ public class DashboardView extends View {
 	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel;
 	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton;
 	private CardLayout cardLayout = new CardLayout();
+
 
 	public DashboardView(Portfolio portfolio) {
 

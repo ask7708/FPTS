@@ -3,29 +3,53 @@ import java.util.Date;
 
 public abstract class Transaction {
 	/**
-	 * the date and time the transaction was made
+	 * Date - the date and time the transaction was made
+	 * cash - the amount being transferred
+	 * Receiver - the object that receives the money
+	 * transfer - the object that gives the money
 	 */
 	private Date time;
 	private int cash;
-	private Object reciever;
+	private Object receiver;
 	private Object transfer;
 	
-	public Transaction(Date time, int amount, Object reciever,Object transfer) throws CashException{
+	/**
+	 * 
+	 * @param time - time of transaction
+	 * @param amount - amount being transferred
+	 * @param receiever - the object getting the money
+	 * @param transfer - the object giving the money
+	 * @throws CashException - not enough money 
+	 * 
+	 *Builder function of Transaction, uses the receiver and transfer object
+	 *to figure out which function to run by finding the instance of the objects
+	 *
+	 *It also raises exceptions if there isn't enough in the account or equity
+	 */
+	
+	public Transaction(Date time, int amount, Object receiver,Object transfer) throws CashException{
 		time = this.time;
 		amount = this.cash;
-		reciever = this.reciever;
+		receiver = this.receiver;
 		transfer = this.transfer;
 		
 		if(transfer instanceof Account){
 			if(((Account) transfer).getAmount() < cash){
 				throw new CashException();
 			}
-			if(reciever instanceof Equity){
+			
+			if(receiver instanceof Equity){
 				AccountToEquity();
+			}
+			else if(receiver instanceof String){
+				Withdraw();
 			}
 			else{
 				AccountToAccount();
 			}
+		}
+		else if(transfer instanceof String){
+			Deposit();
 		}
 		else{
 			Equity transfers = (Equity) transfer;
@@ -38,54 +62,99 @@ public abstract class Transaction {
 		
 	}
 	
+	/**
+	 * returns the time of transaction
+	 */
 	public Date getTime(){
 		return time;
 	}
+	
+	/**
+	 * returns the amount being transferred
+	 */
 	
 	public int getAmount(){
 		return cash;
 	}
 	
-	public Object getReciever(){
-		return reciever;
+	/**
+	 * returns the object that receives the money
+	 */
+	public Object getReceiver(){
+		return receiver;
 	}
 	
+	/**
+	 * returns the object that transfers the money
+	 */
 	public Object getTransfer(){
 		return transfer;
 	}
 	
+	/**
+	 * takes the objects and makes sure that the monetary changes occur between
+	 * account and Equity
+	 */
 	public void AccountToEquity(){
-		Account transfers = (Account) transfer;
-		Equity recievers = (Equity) reciever;
-		double remainder = cash%recievers.getSharePrice();
-		double total = cash/recievers.getSharePrice();
-		transfers.setAmount((transfers.getAmount() - (total*recievers.getSharePrice()) + remainder));
-		recievers.setAcquiredShares((int) (recievers.getAcquiredShares() + total));
+		Account transfers = (Account) transfer; //Transfers is the Account version of transfer
+		Equity receivers = (Equity) receiver; //Receivers is the Equity version of Receiver
+		double remainder = cash%receivers.getSharePrice();
+		double total = cash/receivers.getSharePrice();
+		transfers.setAmount((transfers.getAmount() - (total*receivers.getSharePrice()) + remainder));
+		receivers.setAcquiredShares((int) (receivers.getAcquiredShares() + total));
 		transfer = transfers;
-		reciever = recievers;
+		receiver = receivers;
 		
 	}
 	
+	/**
+	 * takes the objects and makes sure that the monetary changes occur between
+	 * Equity and Account
+	 */
 	public void EquityToAccount(){
-		Equity transfers = (Equity) transfer;
-		Account recievers = (Account) reciever;
+		Equity transfers = (Equity) transfer; //transfers is the Equity version of transfer
+		Account receivers = (Account) receiver; //receivers is the Account version of receiver
 		int total = (int) (cash/transfers.getSharePrice());
 		transfers.setAcquiredShares(transfers.getAcquiredShares() - total);
-		recievers.setAmount(getAmount() + (total*transfers.getSharePrice()));
+		receivers.setAmount(getAmount() + (total*transfers.getSharePrice()));
 		transfer = transfers;
-		reciever = recievers;
+		receiver = receivers;
 		
 	}
 	
+	/**
+	 * takes the objects and makes sure that the monetary changes occur
+	 * between Equity and Account
+	 */
 	public void AccountToAccount(){
-		Account transfers = (Account) transfer;
-		Account recievers = (Account) reciever;
-		recievers.setAmount(recievers.getAmount() + cash);
-		transfers.setAmount(recievers.getAmount() - cash);
+		Account transfers = (Account) transfer; //transfers is the account version of transfer
+		Account recivers = (Account) receiver; //receivers is the account version of receivers
+		recivers.setAmount(recivers.getAmount() + cash);
+		transfers.setAmount(recivers.getAmount() - cash);
 		transfer = transfers;
-		reciever = recievers;
+		receiver = recivers;
 		
 		
+	}
+	
+	/**
+	 * takes the objects and makes sure that the monetary changes occur between
+	 * the account and user
+	 */
+	public void Withdraw(){
+		Account transfers = (Account) transfer; //transfers is the account version of transfer
+		transfers.setAmount(transfers.getAmount() - cash);
+		transfer = transfers;
+	}
+	
+	/**
+	 * takes the objects and makes sure that the monetary changes occur between
+	 * the user and account
+	 */
+	public void Deposit(){
+		Account recivers = (Account) receiver; //receivers is the account version of receiver
+		recivers.setAmount(recivers.getAmount() + cash);
+		receiver = recivers;
 	}
 	
 
