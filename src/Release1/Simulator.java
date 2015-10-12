@@ -83,16 +83,18 @@ public class Simulator {
       //current price * number of shares
 	   List<Double> totalList = new ArrayList<Double>();
 	   Double oneStock = 0.0; 
-	   for(Equity obj: myHoldings){
-		   oneStock = obj.getAcquiredShares() * obj.getSimulationPrice();
-		  totalList.add(oneStock);
-	   } 
-	   
-	   double sum = 0;
-	   for(Double d : totalList)
-		   portfolioVal += d;
-	   return portfolioVal;
-	   
+	      if(!simulations.isEmpty()){
+	    	  return this.simulations.peek().getNewPVal(); 
+	      }else{
+	   	   for(Equity obj: myHoldings){
+	   		   oneStock = obj.getAcquiredShares() * obj.getSimulationPrice();
+	   		  totalList.add(oneStock);
+	   	   } 
+	   	   double sum = 0;
+	   	   for(Double d : totalList)
+	   		   portfolioVal += d;
+	   	   return portfolioVal;
+	      }
    }
    
    public static void main(String[] args) {
