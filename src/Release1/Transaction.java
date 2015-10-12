@@ -1,14 +1,14 @@
 package Release1;
-import java.util.Date;
+import java.time.LocalDate;
 
-public abstract class Transaction {
+public class Transaction {
 	/**
 	 * Date - the date and time the transaction was made
 	 * cash - the amount being transferred
 	 * Receiver - the object that receives the money
 	 * transfer - the object that gives the money
 	 */
-	private Date time;
+	private LocalDate time;
 	private int cash;
 	private Object receiver;
 	private Object transfer;
@@ -27,7 +27,7 @@ public abstract class Transaction {
 	 *It also raises exceptions if there isn't enough in the account or equity
 	 */
 	
-	public Transaction(Date time, int amount, Object receiver,Object transfer) throws CashException{
+	public Transaction(LocalDate time, int amount, Object receiver,Object transfer){
 		time = this.time;
 		amount = this.cash;
 		receiver = this.receiver;
@@ -35,7 +35,12 @@ public abstract class Transaction {
 		
 		if(transfer instanceof Account){
 			if(((Account) transfer).getAmount() < cash){
-				throw new CashException();
+				try {
+					throw new CashException();
+				} catch (CashException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			if(receiver instanceof Equity){
@@ -55,7 +60,12 @@ public abstract class Transaction {
 			Equity transfers = (Equity) transfer;
 			double total = transfers.getAcquiredShares() * transfers.getSharePrice();
 			if(total < cash){
-				throw new CashException();
+				try {
+					throw new CashException();
+				} catch (CashException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			EquityToAccount();
 		}
@@ -65,7 +75,7 @@ public abstract class Transaction {
 	/**
 	 * returns the time of transaction
 	 */
-	public Date getTime(){
+	public LocalDate getTime(){
 		return time;
 	}
 	

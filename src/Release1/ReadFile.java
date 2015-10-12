@@ -3,7 +3,10 @@ package Release1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ReadFile {
 	/**
@@ -47,7 +50,12 @@ public class ReadFile {
         		}
         	else{
         		if(temp[0].charAt(1) == 'T'){
-        			
+        			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        			LocalDate temp5 = LocalDate.parse(temp[5], formatter);
+        			double temp3 = Double.parseDouble(temp[3]);
+        			int temp4 = Integer.parseInt(temp[4]);
+        			int temp6 = Integer.parseInt(temp[6]);
+        			Transaction TransactionInfo = new Transaction(temp5, temp6, (Object)AccountData.get(0), (Object)AccountData.get(0));
         		}
         		else{
         			
@@ -76,24 +84,15 @@ public class ReadFile {
 	 * 
 	 * returns the array of Equities
 	 */
-	public ArrayList<Equity> getEquity(){
+	public ArrayList<Equity> getEquities(){
 		return EquityData;
 	}
-	/**
-	 * 
-	 * routingNum - the number that links to the respective account
-	 * returns the Transactions of a specific routingNum
-	 */
-	public ArrayList<Transaction> getTransaction(int routingNum){
+	
+	public ArrayList<Transaction> getAllTransactions(){
 		return TransactionData;
 	}
 	
-	/**
-	 * 
-	 * @param routingNum - the number that links to the respective account
-	 * returns the Accounts of a specific routingNum
-	 */
-	public ArrayList<Account> getAccount(int routingNum){
+	public ArrayList<Account> getAllAccounts(){
 		return AccountData;
 	}
 	
