@@ -19,7 +19,7 @@ public abstract class Account {
 	/**
 	 * The amount in the type of account
 	 */
-	private int amount;
+	private double amount;
 	
 	/**
 	 * The date the type of account was added
@@ -66,7 +66,7 @@ public abstract class Account {
 	 * 
 	 * @return amount
 	 */
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
@@ -75,7 +75,7 @@ public abstract class Account {
 	 * 
 	 * @param amount
 	 */
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
