@@ -1,14 +1,19 @@
 package Release1;
 
 import java.awt.Font;
+import java.util.Observable;
+import java.util.Observer;
+
 import javax.swing.JFrame;
 
-public abstract class View {
+public class View  {
 
    /**
     * the container holding everything (kind of represents the view)
     */
    protected JFrame screen;
+   
+
    
    /**
     * Makes the view appear in the application 
@@ -27,5 +32,29 @@ public abstract class View {
       
       this.screen = new JFrame();
    }
+   
+   public static void main(String args[]){
+	   
+	   LoginView lg = new LoginView();
+	   
+	   /****************************/
+	   User user = new User("itnks", "nasser");
+	   Portfolio po = new Portfolio(user);
+	   
+	   DashboardView view= new DashboardView(po);
+	   
+	   boolean isDashboard = false;
+	   
+	   if(isDashboard==true){
+	   lg.setVisible(true);
+	   }else{
+	   view.setVisible(true);
+	   }
+	   
+	   
+	   
+   }
+
+
    
 }

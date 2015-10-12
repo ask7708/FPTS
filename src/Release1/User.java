@@ -88,27 +88,59 @@ public class User {
    protected String getUsername() { return this.username; }
    
    
-   public boolean auth(String username, String passwoard) throws FileNotFoundException{
-       String name = "itnks,12345";
-       String pass = "12345";
-       
+   public boolean auth(String username, String password) throws FileNotFoundException{
+
        File f = new File("users.txt");
+       
+       String tempName = "";
+       String tempPass = "";
+       
        Scanner numScan = new Scanner(f);
+       numScan.useDelimiter(",");
         
        String line;
-        
-       while (numScan.hasNext())
-       {
-           line = numScan.next();
-           System.out.print(line);
-           if (line == name){
-           	return true;
-           }else{
-           	return false;
-           }
-       }
-	return false;
+       String[] temp;
+       
+       while (numScan.hasNextLine())
+		{
+       	line = numScan.nextLine();
+       	temp = line.split(",");
+       	if(temp[0].equals(username)){
 
-	}
+       			if(temp[1].equals(password)){
+       				return true;
+       			}else{
+       				return false;
+       			}
+       	}
+		}
+	return false;
+    }
+
+	
+   
+   public static void main (String args[]) throws FileNotFoundException{
+	
+	   User user = new User("itnks", null);
+	   user.setPassword("12345");
+	   
+	    String username;
+	    String password;
+	    Scanner input = new Scanner(System.in);
+	    System.out.println("Log in:");
+	    System.out.println("Indtast username: ");
+	    username = input.nextLine();
+
+	    System.out.println("Indtast password: ");
+	    password = input.nextLine();
+	    
+	   
+	   if (user.auth(username, password)){
+		   System.out.println("go to dashboard");
+	   }else{
+		   System.out.println("go to dashboard");
+	   }
+	   
+   }
 
 }

@@ -33,7 +33,7 @@ public class DashboardView extends JFrame  {
     private CardLayout cardLayout = new CardLayout();
 
    public DashboardView(Portfolio portfolio) {
-      
+       
       super();
       
      setTitle("FPTS - "+ portfolio.getUsername() +  " - Home");

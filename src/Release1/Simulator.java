@@ -8,6 +8,7 @@ public class Simulator {
    protected Stack<Simulation> simulations;
    protected String username;
    protected ArrayList<Equity> myHoldings;
+   protected ArrayList<Account> myAccounts;
    private double portfolioVal;
    
    public Simulator(Portfolio portfolio) {
@@ -30,68 +31,35 @@ public class Simulator {
          sim.addInterestEarned(obj);
    }
    
-   public void removeOneSimulation() {
+   public boolean removeOneSimulation() {
       
-      Simulation undo = simulations.pop();
+      Simulation undo = null;
       
-      if(simulations.size() >= 1)
+      if(!simulations.isEmpty())
+        undo = simulations.pop();
+      else
+         return false;
+      
+      if(!simulations.isEmpty())
          portfolioVal = simulations.peek().getNewPVal();
       else
          portfolioVal = undo.getOldPVal();
+        
+      for(Equity obj: myHoldings) { obj.removePriceChange(); }
       
-      double pct = undo.getPercent();
-      double rate = 0;
-
-      switch(undo.getIntType()) {
-      
-         case DAY:
-            rate = (pct / 100.0) / 365;
-            break;
-         case MONTH:
-            rate = (pct / 100.0) / 12;
-            break;
-         case YEAR:
-            rate = (pct / 100.0);
-            break;
-      }
-      
-      SimulationType sType = undo.getSimType();
-      
-      for(Equity obj: myHoldings) {
-         
-         // Opposite of Bear Market = increase
-         if(sType == SimulationType.BEAR) {
-            
-            int steps = undo.getAmount();
-            
-            while(steps != 0) {
-               
-               double p = obj.getSharePrice();
-               double inc = p * rate;
-               obj.setSharePrice(p + inc);
-               steps--;
-            }
-         }
-         
-         else if(sType == SimulationType.BULL) {
-            
-            int steps = undo.getAmount();
-            
-            while(steps != 0) {
-               
-               obj.setSharePrice(obj.getSharePrice() / 
-                  Math.pow((1 + rate), 1));
-               steps--;
-            }    
-         }
-         
-         else
-            continue;
-      }  
+      return true;  
    }
    
    public void resetAll() {   
       while(!simulations.empty()) { removeOneSimulation(); }
+   }
+   
+   public double getPortfolioValue() { 
+      
+      if(!simulations.isEmpty())
+         return this.simulations.peek().getNewPVal(); 
+      else
+         return portfolioVal;
    }
    
    public static void main(String[] args) {
@@ -99,35 +67,42 @@ public class Simulator {
       User me = new User("dxr5716", "me");
       
       Portfolio portfolio = new Portfolio(me);
-      portfolio.addHolding(new Equity("GOOG", "Google Inc.", 153.54));
+      
+      Equity e1 = new Equity("GOOG", "Google Inc.", 100.00);
+      e1.setAcquiredShares(50);
+      Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
+      e2.setAcquiredShares(20);
+      
+      portfolio.addHolding(e1);
+      portfolio.addHolding(e2);
       
       Simulator simulator = new Simulator(portfolio);
       
       for(Equity obj: simulator.myHoldings) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " is $" + 
-               (String.format("%.02f", obj.getSharePrice())));
+               (String.format("%.02f", obj.getSimulationPrice())));
       }
       
-      simulator.addNewSimulation(new Simulation(SimulationType.BULL, 1, Interval.YEAR, 10.00));
+      simulator.addNewSimulation(new Simulation(SimulationType.BULL, 1, Interval.YEAR, 5.00));
       
       for(Equity obj: simulator.myHoldings) {
          
-         System.out.println("The price of a share at " + obj.getTickSymbol() + " is now $" + 
-               (String.format("%.02f", obj.getSharePrice())));
+         System.out.println("The price of a share at " + obj.getTickSymbol() + " after 1 simulation is now $" + 
+               (String.format("%.02f", obj.getSimulationPrice())));
       }
       
-      simulator.addNewSimulation(new Simulation(SimulationType.BULL, 2, Interval.MONTH, 10.00));
+      simulator.addNewSimulation(new Simulation(SimulationType.BEAR, 2, Interval.MONTH, 10.00));
       
       for(Equity obj: simulator.myHoldings) {
          
-         System.out.println("The price of a share at " + obj.getTickSymbol() + " is now $" + 
-               (String.format("%.02f", obj.getSharePrice())));
+         System.out.println("The price of a share at " + obj.getTickSymbol() + " after 2 simulations is now $" + 
+               (String.format("%.02f", obj.getSimulationPrice())));
       }
-      
-      simulator.resetAll();
 //      
-//      simulator.removeOneSimulation();
+//      simulator.resetAll();
+//      
+      simulator.removeOneSimulation();
 //      
 //      for(Equity obj: simulator.myHoldings) {
 //         
@@ -136,11 +111,11 @@ public class Simulator {
 //      }
 //      
 //      simulator.removeOneSimulation();
-      
+//      
       for(Equity obj: simulator.myHoldings) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " is now $" + 
-               (String.format("%.02f", obj.getSharePrice())));
+               (String.format("%.02f", obj.getSimulationPrice())));
       }
    }
    
