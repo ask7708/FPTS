@@ -88,8 +88,9 @@ public class User {
    protected String getUsername() { return this.username; }
    
    
-   public boolean auth(String username, String passwoard) throws FileNotFoundException{
-       String name = "itnks,12345";
+   public boolean auth(String username, String password) throws FileNotFoundException{
+
+	   String name = "itnks,12345";
        String pass = "12345";
        
        File f = new File("users.txt");
@@ -110,5 +111,10 @@ public class User {
 	return false;
 
 	}
+   
+   public static void main (String args[]){
+	   
+	   
+   }
 
 }

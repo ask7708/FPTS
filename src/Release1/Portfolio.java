@@ -35,7 +35,16 @@ public class Portfolio extends Observable {
     * simulations are being done)
     * @return a copy of the portfolio's holdings
     */
-   public ArrayList<Equity> getHoldings() { return new ArrayList<Equity>(holdings); }
+   public ArrayList<Equity> getHoldings() { 
+      
+      ArrayList<Equity> copy = new ArrayList<Equity>(holdings); 
+      
+      for(Equity obj: copy) {
+         obj.setForSimulation();
+      }
+      
+      return copy;
+   }
    
    public void addHolding(Equity holding) { holdings.add(holding); }
    
