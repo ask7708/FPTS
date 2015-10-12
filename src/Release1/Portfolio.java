@@ -13,12 +13,14 @@ public class Portfolio extends Observable {
 
    private User user;
    
-   private ArrayList<Holding> holdings;
+   private ArrayList<Equity> holdings;
+   private ArrayList<Account> accounts;
    
    public Portfolio(User user) {
    
       this.user = user;
-      this.holdings = new ArrayList<Holding>();
+      this.holdings = new ArrayList<Equity>();
+      this.accounts = new ArrayList<Account>();
    }
    
    public String getUsername() { return user.getUsername(); }
@@ -33,8 +35,9 @@ public class Portfolio extends Observable {
     * simulations are being done)
     * @return a copy of the portfolio's holdings
     */
-   public ArrayList<Holding> getHoldings() { return new ArrayList<Holding>(holdings); }
+   public ArrayList<Equity> getHoldings() { return new ArrayList<Equity>(holdings); }
    
+   public void addHolding(Equity holding) { holdings.add(holding); }
    
    
 }

@@ -17,7 +17,7 @@ public class Simulation {
    /**
     * the type of interval the user selects to simulate (DAY, MONTH, YEAR)
     */
-   private Interval intervalType;
+   private Interval interval;
    
    /**
     * the interval amount (ex. 7 days, 3 months, 4 years)
@@ -60,13 +60,29 @@ public class Simulation {
       
       this.simType = type;
       this.amount = length;
-      this.intervalType = iType;
+      this.interval = iType;
       this.percentage = percent;
       
       this.startDate = null;
       this.endDate = null;
       
    }
+   
+   public SimulationType getSimType() { return this.simType; }
+   
+   public Interval getIntType() { return this.interval; }
+   
+   /**
+    * 
+    * @return
+    */
+   public double getPercent() { return this.percentage; }
+   
+   /**
+    * 
+    * @return
+    */
+   public int getAmount() { return this.amount; }
    
    /**
     * 
@@ -79,4 +95,68 @@ public class Simulation {
     * @param pVal
     */
    public void setNewPVal(double pVal) { this.portfolioValAfter = pVal; }
+   
+   /**
+    * 
+    * @return
+    */
+   public double getOldPVal() { return this.portfolioValBefore; }
+   
+   /**
+    * 
+    * @return
+    */
+   public double getNewPVal() { return this.portfolioValAfter; }
+   
+   /**
+    * 
+    * @param holding
+    */
+   public void addInterestEarned(Equity holding) {
+      
+      double rate = 0;
+      
+      switch(interval) {
+      
+         case DAY:
+            rate = (percentage / 100.0) / 365;
+            break;
+         case MONTH:
+            rate = (percentage / 100.0) / 12;
+            break;
+         case YEAR:
+            rate = (percentage / 100.0);
+            break;  
+      }
+      
+      if(simType == SimulationType.NONE)
+         return;
+      
+      else if(simType == SimulationType.BULL) {
+         
+         int steps = amount;
+         
+         while(steps != 0) {
+            
+            double p = holding.getSharePrice();
+            double inc = p * rate;
+            holding.setSharePrice(p + inc);
+            steps--;
+         }
+      }
+      
+      else {
+         
+         int steps = amount;
+         
+         while(steps != 0) {
+            
+            double p = holding.getSharePrice();
+            double dec = p * rate;
+            holding.setSharePrice(p - dec);
+            steps--;
+         }
+      }
+   }
+   
 }
