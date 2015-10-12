@@ -11,8 +11,8 @@ import java.time.LocalDate;
  */
 public class MarketAccount extends Account {
 	
-	public MarketAccount(String accountName, int amount, LocalDate date) {
-		super(accountName, amount, date);
+	public MarketAccount(String accountName, int amount, LocalDate date, int accountNum, int routingNum) {
+		super(accountName, amount, date, accountNum, routingNum);
 		// TODO Auto-generated constructor stub
 	}
 
