@@ -29,6 +29,10 @@ public abstract class Equity {
 	 */
 	private String industrySec;
 	
+	/**
+	 * The price of the equity
+	 */
+	private int thePrice;
 	
 	/**
 	 * The non-default constructor. Creates an equity with a name
@@ -128,6 +132,22 @@ public abstract class Equity {
 		
 		
 		this.industrySec = industrySec;
+	}
+
+	/**
+	 * Gets the price of the market 
+	 * @return
+	 */
+	public int getThePrice() {
+		return thePrice;
+	}
+
+	/**
+	 * Sets the price of the market
+	 * @param thePrice
+	 */
+	public void setThePrice(int thePrice) {
+		this.thePrice = thePrice;
 	}
 	
 	
