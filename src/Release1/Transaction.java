@@ -9,7 +9,7 @@ public class Transaction {
 	 * transfer - the object that gives the money
 	 */
 	private LocalDate time;
-	private int cash;
+	private double cash;
 	private Object receiver;
 	private Object transfer;
 	
@@ -27,7 +27,7 @@ public class Transaction {
 	 *It also raises exceptions if there isn't enough in the account or equity
 	 */
 	
-	public Transaction(LocalDate time, int amount, Object receiver,Object transfer){
+	public Transaction(LocalDate time, double amount, Object receiver,Object transfer){
 		time = this.time;
 		amount = this.cash;
 		receiver = this.receiver;
@@ -83,7 +83,7 @@ public class Transaction {
 	 * returns the amount being transferred
 	 */
 	
-	public int getAmount(){
+	public double getAmount(){
 		return cash;
 	}
 	
