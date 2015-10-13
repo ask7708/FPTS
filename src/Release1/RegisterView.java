@@ -11,13 +11,14 @@ public class RegisterView extends View {
    public RegisterView() {
       
       super();
-      this.screen.setTitle("FPTS - Register");
+      //this.screen.setTitle("FPTS - Register");
    }
 
-@Override
-public void update(Observable o, Object arg) {
-	// TODO Auto-generated method stub
-	
-}
+   @Override
+   public void update(Observable o, Object arg) {
+      // TODO Auto-generated method stub
+      
+   }
+
    
 }
