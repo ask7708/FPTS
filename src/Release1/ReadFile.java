@@ -38,8 +38,9 @@ public class ReadFile {
         	if(temp[0].charAt(0) != '!'){
         		double temp2 = Double.parseDouble(temp[2]);
         		Equity EquityInfo = new Equity(temp[0], temp[1], temp2);
-        		for(int x = 3; x >= temp.length; x++){
+        		for(int x = 3; x < temp.length; x++){
         			EquityInfo.addIndexOrSec(temp[x]);
+        			System.out.println(temp[x]);
         		}
         		EquityData.add(EquityInfo);        		
         		}
@@ -165,7 +166,7 @@ public class ReadFile {
 		ReadFile rf;
 		try {
 			rf = new ReadFile("data.txt");
-			System.out.println(rf.getEquities());
+			System.out.println(rf.getEquities().toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
