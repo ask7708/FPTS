@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +24,6 @@ import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 
 public class LoginView extends View {
-
 
 	private static final long serialVersionUID = 1L;
 	private JPanel cardPanel, loginPanel, registerPanel, mainPanel;
@@ -151,7 +151,13 @@ public class LoginView extends View {
 	public static void main(String[] args) {
 
 		LoginView login = new LoginView();
-		login.show();
+		login.showScreen();
 	}
+
+   @Override
+   public void update(Observable o, Object arg) {
+      // TODO Auto-generated method stub
+      
+   }
 
 }

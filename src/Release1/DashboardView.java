@@ -9,19 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Observable;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 public class DashboardView extends View {
-
 
 	/**
 	 * Creates the application's dashboard view
@@ -40,7 +35,7 @@ public class DashboardView extends View {
 
 		super();
 
-		this.screen.setTitle("FPTS - " + portfolio.getUsername() + " - Home");
+		//this.screen.setTitle("FPTS - " + portfolio.getUsername() + " - Home");
 
 		cardPanel = new JPanel();
 		mainPanel = new JPanel();
@@ -132,7 +127,13 @@ public class DashboardView extends View {
 		Portfolio po = new Portfolio(user);
 		DashboardView dash = new DashboardView(po);
 		// dash.show();
-		dash.show();
+		dash.showScreen();
 
 	}
+
+   @Override
+   public void update(Observable o, Object arg) {
+      // TODO Auto-generated method stub
+      
+   }
 }

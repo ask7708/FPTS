@@ -4,26 +4,28 @@ import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public  abstract class View {
+public abstract class View implements Observer {
 
 	/**
 	 * the container holding everything (kind of represents the view)
 	 */
-	protected JFrame screen;
+	protected JPanel screen;
+	
+	protected String viewName;
 
 	/**
 	 * Makes the view appear in the application
 	 */
-	public void show() {
+	public void showScreen() {
 		this.screen.setVisible(true);
 	}
 
 	/**
 	 * Hides the view away from the application
 	 */
-	public void hide() {
+	public void hideScreen() {
 		this.screen.setVisible(false);
 	}
 
@@ -32,7 +34,7 @@ public  abstract class View {
 	// for all Views when they are instantiated
 	public View() {
 
-		this.screen = new JFrame();
+		this.screen = new JPanel();
 	}
 
 }

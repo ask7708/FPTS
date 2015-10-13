@@ -3,9 +3,10 @@ package Release1;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Stack;
 
-public class Simulator {
+public class Simulator extends Observable {
 
    protected Stack<Simulation> simulations;
    protected String username;
