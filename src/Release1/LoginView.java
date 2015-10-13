@@ -175,4 +175,10 @@ public class LoginView extends View {
       
    }
 
+   @Override
+   public void getData(Object sim) {
+      // TODO Auto-generated method stub
+      
+   }
+
 }
