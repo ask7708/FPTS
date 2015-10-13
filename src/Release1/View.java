@@ -6,7 +6,7 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
-public  abstract class View {
+public  abstract class View implements Observer {
 
 	/**
 	 * the container holding everything (kind of represents the view)
@@ -31,7 +31,6 @@ public  abstract class View {
 	// kind of way (leaving blank for now until we know what should be set
 	// for all Views when they are instantiated
 	public View() {
-
 		this.screen = new JFrame();
 	}
 

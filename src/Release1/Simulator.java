@@ -3,9 +3,10 @@ package Release1;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Stack;
 
-public class Simulator {
+public class Simulator extends Observable {
 
    protected Stack<Simulation> simulations;
    protected String username;
@@ -126,7 +127,7 @@ public class Simulator {
       simulator.addNewSimulation(new Simulation(SimulationType.BULL, 1, Interval.YEAR, 5.00, simulator.getNextSimDate()));
       
       for(Equity obj: simulator.myHoldings) {
-         
+    	  
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 1 simulation is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
       }
@@ -161,5 +162,6 @@ public class Simulator {
       }
       
    }
+
    
 }

@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -77,6 +78,12 @@ public class LoginView extends View {
 
 		LoginView login = new LoginView();
 		login.show();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
