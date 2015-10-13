@@ -27,6 +27,16 @@ public abstract class Account {
 	private LocalDate date;
 	
 	/**
+	 * The account number for this account
+	 */
+	private int accountNo;
+	
+	/**
+	 * The routing number for this account
+	 */
+	private int routingNo;
+	
+	/**
 	 * Creates an account object with the name, initial amount, 
 	 * and the date it was added.
 	 * 
@@ -34,11 +44,13 @@ public abstract class Account {
 	 * @param amount
 	 * @param date
 	 */
-	public Account(String accountName, int amount, LocalDate date){
+	public Account(String accountName, double amount, LocalDate date, int accountNum, int routingNum){
 		
 		this.accountName = accountName;
 		this.amount = amount;
 		this.setDate(date);
+		this.accountNo = accountNum;
+		this.routingNo = routingNum;
 		
 	}
 

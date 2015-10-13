@@ -41,12 +41,12 @@ public class Simulation {
    /**
     * the value of the portfolio before the simulation begins
     */
-   private double portfolioValBefore;
+   private double pValBefore;
    
    /**
     * the value of the portfolio after the simulation ends
     */
-   private double portfolioValAfter;
+   private double pValAfter;
 
    /**
     * Creates a Simulation object representing a user simulation request from the user.
@@ -57,20 +57,43 @@ public class Simulation {
     * @param iType the kind of time interval selected (DAY, MONTH, YEAR)
     * @param percent the per annum percentage
     */
-   public Simulation(SimulationType type, int length, Interval iType, double percent) {
+   public Simulation(SimulationType type, int length, Interval iType, double percent, LocalDate startDate) {
       
       this.simType = type;
       this.amount = length;
       this.interval = iType;
       this.percentage = percent / 100;
       
-      this.startDate = null;
-      this.endDate = null;
+      this.startDate = startDate;
       
+      switch(iType) {
+      
+      case DAY:
+         this.endDate = startDate.plusDays(length);
+         break;
+      case MONTH:
+         this.endDate = startDate.plusMonths(length);
+         break;
+      case YEAR:
+         this.endDate = startDate.plusYears(length);
+         break;
+      }      
    }
    
+   public LocalDate getStartDate() { return this.startDate; }
+   
+   public LocalDate getEndDate() { return this.endDate; }
+   
+   /**
+    * 
+    * @return
+    */
    public SimulationType getSimType() { return this.simType; }
    
+   /**
+    * 
+    * @return
+    */
    public Interval getIntType() { return this.interval; }
    
    /**
@@ -89,80 +112,30 @@ public class Simulation {
     * 
     * @param pVal
     */
-   public void setOldPVal(double pVal) { this.portfolioValBefore = pVal; }
+   public void setOldPVal(double pVal) { this.pValBefore = pVal; }
    
    /**
     * 
     * @param pVal
     */
-   public void setNewPVal(double pVal) { this.portfolioValAfter = pVal; }
+   public void setNewPVal(double pVal) { this.pValAfter = pVal; }
    
    /**
     * 
     * @return
     */
-   public double getOldPVal() { return this.portfolioValBefore; }
+   public double getOldPVal() { return this.pValBefore; }
    
    /**
     * 
     * @return
     */
-   public double getNewPVal() { return this.portfolioValAfter; }
+   public double getNewPVal() { return this.pValAfter; }
    
-//   /**
-//    * 
-//    * @param holding
-//    */
-//   public void addInterestEarned(Equity holding) {
-//      
-//      double rate = 0;
-//      DecimalFormat df = new DecimalFormat("#.###");
-//      
-//      switch(interval) {
-//      
-//         case DAY:
-//            rate = Math.round(((percentage / 100.0) / 365.0)*1000d)/1000d;
-//            System.out.println("The rate is: " + rate);
-//            break;
-//         case MONTH:
-//            rate = Math.round(((percentage / 100.0) / 12.0)*1000d)/1000d;
-//            System.out.println("The month rate is: " + rate);
-//            break;
-//         case YEAR:
-//            rate = (percentage / 100.0);
-//            break;  
-//      }
-//      
-//      if(simType == SimulationType.NONE)
-//         return;
-//      
-//      else if(simType == SimulationType.BULL) {
-//         
-//         int steps = amount;
-//         
-//         while(steps != 0) {
-//            
-//            double p = holding.getSharePrice();
-//            double inc = p * rate;
-//            holding.setSharePrice(p + inc);
-//            steps--;
-//         }
-//      }
-//      
-//      else {
-//         
-//         int steps = amount;
-//         
-//         while(steps != 0) {
-//            
-//            double p = holding.getSharePrice();
-//            double dec = p * rate;
-//            holding.setSharePrice(p - dec);
-//            steps--;
-//         }
-//      }
-//   }
-   
+   /**
+    * 
+    * @param holding
+    */
    public void addInterestEarned(Equity holding) {
       
       double time = 0;
@@ -187,6 +160,7 @@ public class Simulation {
       switch(simType) {
          
          case NONE:
+            holding.addPriceChange(newPrice);
             return;
             
          case BEAR:

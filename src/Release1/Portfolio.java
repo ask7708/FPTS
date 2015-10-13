@@ -30,7 +30,7 @@ public class Portfolio extends Observable {
    public String getUserLName() { return user.getLastName(); } 
    
    /**
-    * Returns a copy of the holding the portfolio has 
+    * Returns a deep copy of the holding the portfolio has 
     * (I went with a copy so that holdings of the portfolio aren't affected when
     * simulations are being done)
     * @return a copy of the portfolio's holdings
@@ -46,7 +46,12 @@ public class Portfolio extends Observable {
       return copy;
    }
    
-   public void addHolding(Equity holding) { holdings.add(holding); }
+   /**
+    * Returns a deep copy of the accounts the portfolio has
+    * @return a copy of the portfolio's accounts
+    */
+   public ArrayList<Account> getAccounts() { return new ArrayList<Account>(accounts); }
    
+   public void addHolding(Equity holding) { holdings.add(holding); }
    
 }

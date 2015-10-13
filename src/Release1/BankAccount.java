@@ -11,8 +11,8 @@ import java.time.LocalDate;
  */
 public class BankAccount extends Account {
 
-	public BankAccount(String accountName, int amount, LocalDate date) {
-		super(accountName, amount, date);
+	public BankAccount(String accountName, double amount, LocalDate date, int accountNum, int routingNum) {
+		super(accountName, amount, date, accountNum, routingNum);
 		// TODO Auto-generated constructor stub
 	}
 	
