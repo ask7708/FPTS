@@ -109,6 +109,15 @@ public class User {
 		return this.username;
 	}
 
+	/**
+	 * Checks the system to see if the username and password combo already exist
+	 * within the system.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public boolean auth(String username, String password) throws FileNotFoundException {
 
 		File f = new File("users.txt");
@@ -137,6 +146,13 @@ public class User {
 		return false;
 	}
 
+	/**
+	 * Reads the users textfile to see if the user already exists within the system
+	 * 
+	 * @param username
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public boolean userExists(String username) throws FileNotFoundException {
 
 		File f = new File("users.txt");
