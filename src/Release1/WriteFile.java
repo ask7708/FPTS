@@ -11,7 +11,7 @@ import java.io.OutputStreamWriter;
 
 public class WriteFile {
 	
-	WriteFile(){
+	public WriteFile(){
 		
 	}
 	
