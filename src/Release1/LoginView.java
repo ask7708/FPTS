@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Observable;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -155,14 +154,11 @@ public class LoginView extends View {
 		login.showScreen();
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
 
-
+   @Override
+   public void update(Observable o, Object arg) {
+      // TODO Auto-generated method stub
+      
+   }
 
 }
-
-
