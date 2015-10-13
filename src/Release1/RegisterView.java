@@ -1,5 +1,7 @@
 package Release1;
 
+import java.util.Observable;
+
 public class RegisterView extends View {
 
    /**
@@ -11,5 +13,11 @@ public class RegisterView extends View {
       super();
       this.screen.setTitle("FPTS - Register");
    }
+
+@Override
+public void update(Observable o, Object arg) {
+	// TODO Auto-generated method stub
+	
+}
    
 }

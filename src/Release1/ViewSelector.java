@@ -9,13 +9,15 @@ public class ViewSelector implements Observer {
 	
 	private Login theLoginModel;
 	private LoginView theLoginView;
-
-	public ViewSelector(){
 	
+	
+	
+	public ViewSelector(){
 		
 		
 	}
-
+	
+	
    @Override
    public void update(Observable o, Object arg) {
      
