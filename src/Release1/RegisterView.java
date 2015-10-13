@@ -19,5 +19,6 @@ public class RegisterView extends View {
       // TODO Auto-generated method stub
       
    }
+
    
 }

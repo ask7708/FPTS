@@ -8,6 +8,7 @@ import javax.swing.*;
 
 public abstract class View implements Observer {
 
+
 	/**
 	 * the container holding everything (kind of represents the view)
 	 */
@@ -16,6 +17,7 @@ public abstract class View implements Observer {
 	protected String viewName;
 
 	/**
+	 * 
 	 * Makes the view appear in the application
 	 */
 	public void showScreen() {

@@ -18,6 +18,7 @@ import javax.swing.*;
 
 public class DashboardView extends View {
 
+	
 	/**
 	 * Creates the application's dashboard view
 	 * 
@@ -130,6 +131,7 @@ public class DashboardView extends View {
 		dash.showScreen();
 
 	}
+
 
    @Override
    public void update(Observable o, Object arg) {

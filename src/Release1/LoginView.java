@@ -168,6 +168,7 @@ public class LoginView extends View {
 		login.showScreen();
 	}
 
+
    @Override
    public void update(Observable o, Object arg) {
       // TODO Auto-generated method stub

@@ -1,10 +1,15 @@
 package Release1;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Stack;
+
+import javax.swing.text.NumberFormatter;
 
 public class Simulator extends Observable {
 
@@ -33,6 +38,105 @@ public class Simulator extends Observable {
     * @return
     */
    public LocalDate getDate() { return this.currentDate; }
+   
+   public ArrayList<String> getEquitiesShort() {
+   
+      ArrayList<String> strs = new ArrayList<String>();
+      //NumberFormat formatter = NumberFormat.getCurrencyInstance();
+      for(Equity obj: myHoldings) {
+         
+         String newS = new String();
+         newS += obj.getTickSymbol();
+         newS += " / $" + (String.format("%.02f", obj.getSimulationPrice()));
+         
+         ArrayList<String> sectors = obj.getIndexOrSec();
+         
+         if(!sectors.isEmpty()) {
+            
+            for(String o: sectors)
+               newS += o + "/ ";
+         }
+         
+         newS = newS.substring(0, newS.length()-3);
+         strs.add(newS);
+      }
+      
+      return strs;
+   }
+   
+   public ArrayList<String> getEquitiesLong() {
+      
+      ArrayList<String> strs = new ArrayList<String>();
+      
+//      for(Equity obj: holdings)
+      return strs;
+   }
+   
+   public ArrayList<String> getSimulationsShort() {
+   
+      ArrayList<String> strs = new ArrayList<String>();
+      DateTimeFormatter df = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+      
+      for(int i = 0; i < simulations.size(); i++) {
+      
+         String newS = new String();
+         newS += simulations.get(i).getSimType().toString();
+         newS += " / " + simulations.get(i).getAmount() + " ";
+         
+         switch(simulations.get(i).getIntType()) {
+            
+            case DAY:
+               newS += "DAY @ " + (simulations.get(i).getPercent()*100) + "% / ";
+               break;
+            case MONTH:
+               newS += "MONTH @ " + (simulations.get(i).getPercent()*100) + "% / ";
+               break;
+            case YEAR:
+               newS += "YEAR @ " + (simulations.get(i).getPercent()*100) + "% / ";
+               break;
+         }
+         
+         newS += simulations.get(i).getStartDate().format(df);
+         strs.add(newS);
+      }
+      
+      return strs;
+   }
+   public ArrayList<String> getSimulationsLong() {
+   
+      ArrayList<String> strs = new ArrayList<String>();
+      DateTimeFormatter df = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+      
+      for(int i = 0; i < simulations.size(); i++){
+      
+         String newS = new String();
+         
+         switch(simulations.get(i).getSimType()) {
+         
+         case BULL:
+            newS += "Bull Market Simulation\n";
+            break;
+         case BEAR:
+            newS += "Bear Market Simulation\n";
+            break;
+         case NONE:
+            newS += "No-Growth Market Simulation\n";
+            break;
+      }
+         
+         newS += simulations.get(i).getAmount() + " " + 
+               simulations.get(i).getIntType().toString() + " @ " + (simulations.get(i).getPercent()*100)
+               + "%\n";
+         newS += simulations.get(i).getStartDate().format(df) + " to " + 
+               simulations.get(i).getEndDate().format(df) + "\n";
+         newS += "Portfolio Before: $" + simulations.get(i).getOldPVal() +"\n";
+         newS += "Portfolio After: $" + simulations.get(i).getNewPVal() +"\n";
+         
+         strs.add(newS);
+      }
+      
+      return strs;
+   }
    
    public LocalDate getNextSimDate() {
       
@@ -113,7 +217,10 @@ public class Simulator extends Observable {
       portfolio.addHolding(e2);
       
       Simulator simulator = new Simulator(portfolio);
-      System.out.println(simulator.getDate());
+      ArrayList<String> eq = simulator.getEquitiesShort();
+      
+      for(String obj: eq)
+         System.out.println(obj);
       
       System.out.println("The value of the Portfolio is "  + simulator.getPortfolioValue());
       
@@ -127,11 +234,11 @@ public class Simulator extends Observable {
       simulator.addNewSimulation(new Simulation(SimulationType.BULL, 1, Interval.YEAR, 5.00, simulator.getNextSimDate()));
       
       for(Equity obj: simulator.myHoldings) {
-         
+    	  
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 1 simulation is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
       }
-      System.out.println(simulator.getNextSimDate().toString());
+
       simulator.addNewSimulation(new Simulation(SimulationType.BEAR, 2, Interval.MONTH, 10.00, simulator.getNextSimDate()));
       //System.out.println("The next simulation would start on: " + simulator.getNextSimDate().toString());
       
@@ -140,6 +247,11 @@ public class Simulator extends Observable {
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 2 simulations is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
       }
+      
+      ArrayList<String> sims = simulator.getSimulationsLong();
+      
+      for(String o: sims) 
+         System.out.println(o);
       
       System.out.println("The value of the Portfolio is "  + simulator.getPortfolioValue());
 //      
@@ -162,5 +274,6 @@ public class Simulator extends Observable {
       }
       
    }
+
    
 }

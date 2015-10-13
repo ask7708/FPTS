@@ -11,10 +11,13 @@ import java.io.OutputStreamWriter;
 
 public class WriteFile {
 	
+	public WriteFile(){
+		
+	}
+	
 	public void removeText(String line, File data) throws IOException{
 		File inputFile = data;
 		File tempFile = new File("myTempFile.txt");
-
 		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 		BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
