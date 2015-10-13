@@ -37,11 +37,6 @@ public class ReadFile {
         	temp = line.split(",");
         	if(temp[0].charAt(0) != '!'){
         		double temp2 = Double.parseDouble(temp[2]);
-        		for(int y = 0; y >= EquityData.size(); y++){
-        			if(EquityData.get(y).getTickSymbol() == temp[0]){
-        				updateEquityPrice(temp2, temp[0]);
-        			}
-        		}
         		Equity EquityInfo = new Equity(temp[0], temp[1], temp2);
         		for(int x = 3; x >= temp.length; x++){
         			EquityInfo.addIndexOrSec(temp[x]);
@@ -149,22 +144,6 @@ public class ReadFile {
 		   }
 		dataRead.close();
 	}
-	
-	/**
-	 * 
-	 * @param amount - the amount it will be changed too
-	 * @param ticker - the ticker equity that will be changed
-	 * 
-	 * automatically updates the Equity with the most recent price
-	 */
-	public void updateEquityPrice(double amount, String ticker){
-		for(int x = 0; x >= EquityData.size(); x++){
-			if(EquityData.get(x).getTickSymbol() == ticker){
-				EquityData.get(x).setSharePrice(amount);
-			}
-		}
-		
-	}
 	/**
 	 * 
 	 * returns the array of Equities
@@ -180,43 +159,4 @@ public class ReadFile {
 	public ArrayList<Account> getAllAccounts(){
 		return AccountData;
 	}
-	
-	/**
-	 * removes an Equity from the file
-	 */
-	public void RemoveEquity(){
-		
-	}
-	/**
-	 * removes a Transaction from the file
-	 */
-	public void RemoveTransaction(){
-		
-	}
-	/**
-	 * removes an Account from the file
-	 */
-	public void RemoveAccount(){
-		
-	}
-	
-	/**
-	 * adds an Equity to the File
-	 */
-	public void AddEquity(){
-		
-	}
-	/**
-	 * adds an Account to the File
-	 */
-	public void AddAccount(){
-		
-	}
-	/**
-	 * Adds a Transaction to the File
-	 */
-	public void AddTransaction(){
-		
-	}
-	
 }
