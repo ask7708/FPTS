@@ -120,7 +120,7 @@ public class Equity {
 	 * @return
 	 */
 	public ArrayList<String> getIndexOrSec() {
-		return indexOrSec;
+		return this.indexOrSec;
 	}
 
 	/**
@@ -176,5 +176,26 @@ public class Equity {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * 
+	 */
+	public String toString(){
+		
+		 String newS = new String();
+         newS += this.getTickSymbol();
+         newS += " / " + this.getName();
+         newS += " / $" + (this.getSharePrice()+" / ");
+         
+         ArrayList<String> sectors = this.getIndexOrSec();
+         
+         if(!sectors.isEmpty()) {
+            
+            for(String o: sectors)
+               newS += o + "/ ";
+         }
+         
+         newS = newS.substring(0, newS.length()-3);
+         return newS;
+	}
 }
