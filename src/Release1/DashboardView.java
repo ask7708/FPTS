@@ -101,6 +101,10 @@ public class DashboardView extends View {
 
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(cardPanel, "4");
+				/**
+				 * Show the list of holdings the user currently has
+				 * 
+				 */
 
 			}
 		});

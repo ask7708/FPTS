@@ -21,6 +21,7 @@ public class ViewSelector extends JFrame {
 	public ViewSelector(Portfolio portfolio) {
 		
 		this.portfolio = portfolio;
+		setSize(800, 500);
 		setVisible(true);
 	}
 	
