@@ -31,13 +31,17 @@ public class DashboardView extends View {
 	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton;
 	private CardLayout cardLayout = new CardLayout();
 
+	private User someUser;
+	
 
-	public DashboardView(Portfolio portfolio) {
+	public DashboardView(User someUser) {
 
 		super();
 
 		//this.screen.setTitle("FPTS - " + portfolio.getUsername() + " - Home");
 
+		this.someUser = someUser;
+		
 		cardPanel = new JPanel();
 		mainPanel = new JPanel();
 		cardPanel.setLayout(cardLayout);
@@ -63,17 +67,11 @@ public class DashboardView extends View {
 		cardPanel.add(holdingsPanel, "4");
 
 		dashboardButton = new JButton("Dash Board");
-		JLabel helloText = new JLabel("Hello");
-		JLabel firstNameFaild = new JLabel(portfolio.getUserFName());
-		JLabel lastNameFalid = new JLabel(portfolio.getUserLName());
+
 		// helloText.setBounds(150, 50, 80, 25);
 		// JButton logoutButton = new JButton("Log Out!");
 
 		dashPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-		dashPanel.add(helloText);
-		dashPanel.add(firstNameFaild);
-		dashPanel.add(lastNameFalid);
 		dashboardButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -88,13 +86,17 @@ public class DashboardView extends View {
 			}
 		});
 
-		portfolioButton = new JButton("Manage Your Portfolio");
+		portfolioButton = new JButton("View Your Portfolio");
 		portfolioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(cardPanel, "3");
+				Portfolio portObj = new Portfolio(getUserAfterLogin());
+				portObj.viewPortfolio(); /*Show text file of portfolio to user*/
+
 			}
 		});
+		
 
 		holdingsButton = new JButton("Manage Your Holding");
 		holdingsButton.addActionListener(new ActionListener() {
@@ -110,7 +112,7 @@ public class DashboardView extends View {
 		});
 
 		/**
-		 * Date date = new Date(); SimpleDateFormat sdf = new SimpleDateFormat(
+		 * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
 		 * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
 		 * mainPanel.add(dateNow);
 		 **/
@@ -124,18 +126,14 @@ public class DashboardView extends View {
 		this.screen.setSize(600, 600);
 	}
 
-	public static void main(String[] args) {
-		// creat a port
-		User user = new User("itnks", "nasser");
-		user.setFirstName("Talal");
-		user.setLastName("Alsarrani");
-		Portfolio po = new Portfolio(user);
-		DashboardView dash = new DashboardView(po);
-		// dash.show();
-		dash.showScreen();
 
+	
+	
+	public User getUserAfterLogin(){
+		
+		return this.someUser;
 	}
-
+	
 
    @Override
    public void update(Observable o, Object arg) {

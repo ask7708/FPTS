@@ -37,7 +37,10 @@ public class LoginView extends View {
 	User theUserModel;
 	ViewSelector theViewSelector;
 	private boolean userExists = false;
-
+	
+	private JTextField userText = new JTextField(20);
+	final JPasswordField passwordText = new JPasswordField(20);
+	
 	
 	/**
 	 * Creates the login screen that will first be displayed when the
@@ -64,11 +67,10 @@ public class LoginView extends View {
 		JLabel userLabel = new JLabel("User");
 		loginPanel.add(userLabel);
 
-		final JTextField userText = new JTextField(20);
+		
 		loginPanel.add(userText);
 		JLabel passwordLabel = new JLabel("Password");
 		loginPanel.add(passwordLabel);
-		final JPasswordField passwordText = new JPasswordField(20);
 		loginPanel.add(passwordText);
 
 		/**
@@ -93,7 +95,8 @@ public class LoginView extends View {
 						 * 
 						 * 
 						 */
-						Portfolio portObj = new Portfolio(new User(tempName, tempPassword));
+						System.out.println(tempName);
+						User existingUser = new User(tempName, tempPassword);
 						//DashboardView dv = new DashboardView(portObj);
 					   Container c = loginboardButton;
 						
@@ -102,7 +105,7 @@ public class LoginView extends View {
 						
 						   System.out.println("FOUND PARENT");
 						   ViewSelector vs = (ViewSelector)c;
-						   vs.makeTransition("");
+						   vs.makeTransition("", existingUser);
 
 					}else{
 						
@@ -162,6 +165,20 @@ public class LoginView extends View {
 		this.screen.setSize(250, 250);
 	}
 
+	
+	public String getEnteredUserName(){
+		
+		
+		return userText.getText();
+	}
+	
+	public String getEnteredPassword(){
+		
+		return new String(passwordText.getPassword());
+
+	}
+	
+	
 	public static void main(String[] args) {
 
 		LoginView login = new LoginView();

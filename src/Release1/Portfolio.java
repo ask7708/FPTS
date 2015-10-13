@@ -21,6 +21,12 @@ public class Portfolio extends Observable {
       this.user = user;
       this.holdings = new ArrayList<Equity>();
       this.accounts = new ArrayList<Account>();
+      /**
+       * If the file exists read in holdings and account if not do nothing 
+       * 
+       * 
+       * 
+       */
    }
    
    public String getUsername() { return user.getUsername(); }
@@ -53,5 +59,24 @@ public class Portfolio extends Observable {
    public ArrayList<Account> getAccounts() { return new ArrayList<Account>(accounts); }
    
    public void addHolding(Equity holding) { holdings.add(holding); }
+ 
+   
+   public void viewPortfolio(){
+	   	
+	   /***
+	    * Show text file to user
+	    * 
+	    * 
+	    * 
+	    * 
+	    * 
+	    * 
+	    */
+	   
+	   
+	   
+   }
+   
+   
    
 }

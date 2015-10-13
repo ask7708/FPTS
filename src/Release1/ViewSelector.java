@@ -17,14 +17,15 @@ public class ViewSelector extends JFrame {
    
 	private Portfolio portfolio;
 	private View currentView;
+	private PortfolioController portCont;
 		
-	public ViewSelector(Portfolio portfolio) {
+	public ViewSelector() {
 		
-		this.portfolio = portfolio;
 		setSize(800, 500);
 		setVisible(true);
 	}
 	
+	/*
 	public void makeTransition(String viewType) {
 	   
 
@@ -42,10 +43,32 @@ public class ViewSelector extends JFrame {
 	         setCurrent(new RegisterView());
 	         break;
 	      default:
-	         setCurrent(new DashboardView(portfolio));
+	         setCurrent(new DashboardView());
 	         break;
 	   }
-	}
+	}*/
+	
+	public void makeTransition(String viewType, User someUser) {
+		   
+
+		   currentView.hideScreen();
+		   
+		   switch(viewType) {
+		   
+		      case "LOGIN":
+		         setCurrent(new LoginView());
+		         break;
+		      case "SIMULATION":
+		         setCurrent(new SimulatorView(new Simulator(portfolio)));
+		         break;
+		      case "REGISTER":
+		         setCurrent(new RegisterView());
+		         break;
+		      default:
+		         setCurrent(new DashboardView(someUser));
+		         break;
+		   }
+		}
 	
 	public void setCurrent(View obj) {
 	   
