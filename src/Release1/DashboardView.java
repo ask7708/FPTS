@@ -140,4 +140,10 @@ public class DashboardView extends View {
       // TODO Auto-generated method stub
       
    }
+
+   @Override
+   public void getData(Object sim) {
+      // TODO Auto-generated method stub
+      
+   }
 }

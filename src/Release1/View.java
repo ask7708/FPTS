@@ -31,6 +31,8 @@ public abstract class View implements Observer {
 		this.screen.setVisible(false);
 	}
 
+	public abstract void getData(Object sim);
+	
 	// may be necessary to have all views to be set up in a default
 	// kind of way (leaving blank for now until we know what should be set
 	// for all Views when they are instantiated
