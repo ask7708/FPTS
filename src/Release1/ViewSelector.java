@@ -21,6 +21,7 @@ public class ViewSelector extends JFrame {
 	public ViewSelector(Portfolio portfolio) {
 		
 		this.portfolio = portfolio;
+		setVisible(true);
 	}
 	
 	public void makeTransition(String viewType) {

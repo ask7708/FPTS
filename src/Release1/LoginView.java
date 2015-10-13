@@ -2,6 +2,7 @@ package Release1;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,7 +94,20 @@ public class LoginView extends View {
 						 * 
 						 */
 						Portfolio portObj = new Portfolio(new User(tempName, tempPassword));
+						//DashboardView dv = new DashboardView(portObj);
+					   Container c = loginboardButton;
+						
+						   while(c.getParent() != null)
+						       c = c.getParent();
+						
+						   System.out.println("FOUND PARENT");
+						   ViewSelector vs = (ViewSelector)c;
+						   vs.makeTransition("");
 
+					}else{
+						
+						JOptionPane.showMessageDialog(null,
+								"The username and password combination are incorrect. Please close this window and try again.");
 					}
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block

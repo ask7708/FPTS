@@ -34,7 +34,7 @@ public class ReadFile {
 		while (dataRead.hasNextLine())
 		{
         	line = dataRead.nextLine();
-        	temp = line.split(",");
+        	temp = line.split("\",\"");
         	if(temp[0].charAt(0) != '!'){
         		double temp2 = Double.parseDouble(temp[2]);
         		Equity EquityInfo = new Equity(temp[0], temp[1], temp2);
@@ -159,4 +159,19 @@ public class ReadFile {
 	public ArrayList<Account> getAllAccounts(){
 		return AccountData;
 	}
+
+	public static void main(String[] args){
+		
+		ReadFile rf;
+		try {
+			rf = new ReadFile("data.txt");
+			System.out.println(rf.getEquities());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
 }
