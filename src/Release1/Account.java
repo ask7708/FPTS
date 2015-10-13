@@ -63,7 +63,20 @@ public abstract class Account {
 	public String getAccountName() {
 		return accountName;
 	}
-
+	
+	/**
+	 * gets the routing number of the
+	 * specified int
+	 */
+	public int getRoutingnum(){
+		return routingNo;
+	}
+	/**
+	 * sets the routingno for the specified int
+	 */
+	public void setRoutingnum(int setNumber){
+		routingNo =  setNumber;
+	}
 	/**
 	 * Set the name of an account
 	 * 
