@@ -17,6 +17,7 @@ public abstract class View implements Observer {
 	protected String viewName;
 
 	/**
+	 * 
 	 * Makes the view appear in the application
 	 */
 	public void showScreen() {
