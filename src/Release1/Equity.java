@@ -143,13 +143,35 @@ public class Equity {
 		return acquiredShares;
 	}
 
-	public void setForSimulation() { this.priceChanges = new Stack<Double>(); }
+	/**
+	 * Gives the equity its price changes Stack so that it could be used for Simulation
+	 */
+	public void putSimulationOn() { this.priceChanges = new Stack<Double>(); }
 	
+	/**
+	 * Removes the equity's price changes Stack so that the portfolio (and its equities)  
+	 * can be sent back to DashboardView (or any other view for that matter) in the same 
+	 * state that it came in
+	 */
+	public void putSimulationOff() { 
+	   
+	   this.priceChanges.removeAllElements(); 
+	   this.priceChanges = null; 
+	}
+	
+	/**
+	 * Used to add a price change to its Stack 
+	 * @param newPrice
+	 */
 	public void addPriceChange(double newPrice) {
 	   
 	   this.priceChanges.push(newPrice);
 	}
 	
+	/**
+	 * Used to remove a price change from its Stack
+	 * (It's safe enough that it won't break if called outside of the simulator)
+	 */
 	public void removePriceChange() { 
 	   
 	   if(this.priceChanges != null) {
@@ -159,15 +181,22 @@ public class Equity {
 	   }
 	}
 	
+	/**
+	 * Used to get the price per share of an Equity in the simulator
+	 * (It's safe enough that it won't break and would return the Equity's initial price
+	 * if called outside of the simulator)
+	 * @return
+	 */
 	public double getSimulationPrice() {
+	   Double simPrice = new Double(eqPrice);
 	   
 	   if(this.priceChanges != null) {
 	      
 	      if(!this.priceChanges.empty())
-	         return priceChanges.peek();
+	         simPrice = priceChanges.peek();
 	   }
 	   
-	   return this.eqPrice;
+	   return simPrice;
 	}
 	
 	/**
@@ -192,7 +221,7 @@ public class Equity {
 		 String newS = new String();
          newS += this.getTickSymbol();
          newS += " / " + this.getName();
-         newS += " / $" + (this.getSharePrice()+" / ");
+         newS += " / $" + (this.getSharePrice() +" / ");
          
          ArrayList<String> sectors = this.getIndexOrSec();
          

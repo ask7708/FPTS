@@ -21,13 +21,12 @@ import javax.swing.*;
 
 public class SimulatorView extends View {
 
-
     private static final long serialVersionUID = 1L;
     private JPanel cardPanel, stockPanel, accountPanel, leftPanel, portfolioPanel, holdingsPanel;
     private JLabel stockLabel, accountLabel, portfolioLabel, holdingsLabel;
     private JButton stockButton, accountButton, portfolioButton, holdingsButton;
     private CardLayout cardLayout = new CardLayout();
-    
+    private Simulator simulator;
     
     public ArrayList<String> toString(ArrayList<Equity> list){
     	return new ArrayList<String>();
@@ -51,11 +50,10 @@ public class SimulatorView extends View {
 //    	
 //    	
     }
-	public SimulatorView(Simulator simulator  ){
+	public SimulatorView() {
 		
 		super();
-		//simulator.addObserver(this);
-			
+		this.simulator = null;
 	      
 	      cardPanel = new JPanel();
 	      leftPanel = new JPanel();
@@ -70,13 +68,17 @@ public class SimulatorView extends View {
 	      
 	      //stockPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 	      
-	      StringBuilder builder = new StringBuilder(simulator.myHoldings.size());
-	      for (int i=0;i<simulator.myHoldings.size();builder.append(simulator.myHoldings.get(i++))) builder.append("\n");
+//	      StringBuilder builder = new StringBuilder(simulator.myHoldings.size());
+	      StringBuilder builder = new StringBuilder(simulator.portfolio.getHoldingsNew().size());
+	      
+//	      for (int i=0;i<simulator.myHoldings.size();builder.append(simulator.myHoldings.get(i++))) builder.append("\n");
+	      for (int i=0; i<simulator.portfolio.getHoldingsNew().size();builder.append(simulator.portfolio.getHoldingsNew().get(i++))) builder.append("\n");
 	      JOptionPane.showMessageDialog(null, builder.toString(), "Printing results", JOptionPane.INFORMATION_MESSAGE);
 	      
 	      
 	      
-	      JLabel holdings = new JLabel(simulator.myHoldings.toString());
+//	      JLabel holdings = new JLabel(simulator.myHoldings.toString());
+	      JLabel holdings = new JLabel(simulator.portfolio.getHoldingsNew().toString());
 	      stockPanel.add(holdings);
 	      stockButton.addActionListener(new ActionListener() {
 
@@ -119,20 +121,25 @@ public class SimulatorView extends View {
 	      portfolio.addHolding(e1);
 	      portfolio.addHolding(e2);
 	      
-	      Simulator simulator = new Simulator(portfolio);
+	      //Simulator simulator = new Simulator();
 	      
-	      SimulatorView ex = new SimulatorView(simulator);
+	      SimulatorView ex = new SimulatorView();
 	      ex.showScreen();
 	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+
+	   // The view will be updated 
 	}
+	
    @Override
    public void getData(Object sim) {
-      // TODO Auto-generated method stub
       
+      Portfolio pv = (Portfolio) sim;
+      simulator = new Simulator(pv);
+      simulator.addObserver(this);
+            
    }
 
 }
