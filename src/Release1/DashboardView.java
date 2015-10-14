@@ -28,8 +28,8 @@ public class DashboardView extends View {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel cardPanel, dashPanel, accountPanel, mainPanel, portfolioPanel, holdingsPanel;
-	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel;
-	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton;
+	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel, addHoldingsLabel;
+	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, addHoldingsButton;
 	private CardLayout cardLayout = new CardLayout();
 
 	private User someUser;
@@ -57,11 +57,13 @@ public class DashboardView extends View {
 		accountPanel = new JPanel();
 		portfolioPanel = new JPanel();
 		holdingsPanel = new JPanel();
+		
 
 		dahboardLabel = new JLabel("");
 		accountLabel = new JLabel("Account Details");
 		portfolioLabel = new JLabel("Manage Your Portfolio");
 		holdingsLabel = new JLabel("Manage Your Holdings");
+		addHoldingsLabel = new JLabel("Add Equities");
 
 		dashPanel.add(dahboardLabel);
 		accountPanel.add(accountLabel);
@@ -153,16 +155,19 @@ public class DashboardView extends View {
 	      portfolioPanel = new JPanel();
 	      holdingsPanel = new JPanel();
 
+	      
 	      dahboardLabel = new JLabel("");
 	      accountLabel = new JLabel("Account Details");
 	      portfolioLabel = new JLabel("Manage Your Portfolio");
 	      holdingsLabel = new JLabel("Manage Your Holdings");
-
+	      addHoldingsLabel = new JLabel("Add equity");
+	      
 	      dashPanel.add(dahboardLabel);
 	      accountPanel.add(accountLabel);
 	      portfolioPanel.add(portfolioLabel);
 	      holdingsPanel.add(holdingsLabel);
-
+	      
+	      
 	      cardPanel.add(dashPanel, "1");
 	      cardPanel.add(accountPanel, "2");
 	      cardPanel.add(portfolioPanel, "3");
@@ -213,6 +218,30 @@ public class DashboardView extends View {
 	         }
 	      });
 
+
+	      addHoldingsButton = new JButton("Add an equity");
+	      addHoldingsButton.addActionListener(new ActionListener() {
+
+	         public void actionPerformed(ActionEvent e) {
+	            
+	        	 int selectedOption = JOptionPane.showConfirmDialog(null, 
+                         "Is your holding purchased from FPTS?", 
+                         "Choose", 
+                         JOptionPane.YES_NO_OPTION); 
+	        	if(selectedOption == JOptionPane.NO_OPTION){
+	        		
+	        		WriteFile wf = new WriteFile();
+	        		
+	        		
+	        	}else{
+	        		
+	        		JOptionPane.showMessageDialog(null,"The system does not currently support this Feature.");
+	        	}
+	        	 
+
+	         }
+	      });
+	      
 	      /**
 	       * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
 	       * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
@@ -223,6 +252,7 @@ public class DashboardView extends View {
 	      mainPanel.add(accountButton);
 	      mainPanel.add(portfolioButton);
 	      mainPanel.add(holdingsButton);
+	      mainPanel.add(addHoldingsButton);
 	      this.screen.add(cardPanel, BorderLayout.NORTH);
 	      this.screen.add(mainPanel, BorderLayout.SOUTH);
 	      this.screen.setSize(600, 600);   
