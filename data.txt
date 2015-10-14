@@ -13,3 +13,4 @@
 "AMAT","Applied Materials, Inc.","15.6","NASDAQ100"
 "ADSK","Autodesk, Inc.","46.15","NASDAQ100"
 "ADP","Automatic Data Processing, Inc.","77.76","NASDAQ100"
+"!OWNED","ASST","Assistance Co.","12.34","23.45","20151013","DOW"

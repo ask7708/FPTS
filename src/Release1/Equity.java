@@ -10,7 +10,7 @@ import java.util.Stack;
  * @author Arshdeep Khalsa, 
  *
  */
-public class Equity {
+public class Equity implements Holdings {
 	
 	/**
 	 * Equity Name
@@ -227,11 +227,12 @@ public class Equity {
          
          if(!sectors.isEmpty()) {
             
-            for(String o: sectors)
+            for(String o: sectors){
                newS += o + "/ ";
+            }
          }
          
-         newS = newS.substring(0, newS.length()-3);
+         newS = newS.substring(0, newS.length()-2);
          return newS;
 	}
 }

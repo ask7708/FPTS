@@ -25,6 +25,7 @@ public class ReadFile {
 	 * then converts them into a respective format and add them into an array
 	 */
 	public ReadFile(String textName) throws FileNotFoundException{
+
 		//
 		File data = new File(textName);
 		Scanner dataRead = new Scanner(data);
@@ -35,22 +36,27 @@ public class ReadFile {
 		while (dataRead.hasNextLine())
 		{
         	line = dataRead.nextLine();
-        	temp = line.split("\",\"");
+        	line = line.replace("\"", "");
+        	line = line.replace(", ", "");
+        	temp = line.split(",");
         	ReadFileStrategy Strategy = new ReadFileStrategy();
         	if(temp[0].charAt(0) != '!'){
-        			Equity EquityInfo = Strategy.EquityRead(temp);
+        			Equity EquityInfo = (Equity) Strategy.EquityRead(temp);
         			EquityData.add(EquityInfo);
         		}
         	else{
+        		System.out.println("ENTER ELSE");
         		if(temp[0].charAt(1) == 'T'){
         			Transaction TransactionInfo = Strategy.TransactionRead(temp, EquityData,AccountData);
         			TransactionData.add(TransactionInfo);
         		}
         		else if(temp[0].charAt(1) == 'O'){
-        			Equity OwnedEquityInfo = Strategy.OwnedEquityRead(temp);
+        			System.out.println("OWNED");
+        			Equity OwnedEquityInfo = (Equity) Strategy.OwnedEquityRead(temp);
+        			OwnedEquityData.add(OwnedEquityInfo);
         		}
         		else{
-        			Account AccountInfo = Strategy.AccountRead(temp);
+        			Account AccountInfo = (Account) Strategy.AccountRead(temp);
         			AccountData.add(AccountInfo);
         		}
         	}
@@ -72,13 +78,18 @@ public class ReadFile {
 	public ArrayList<Account> getAllAccounts(){
 		return AccountData;
 	}
+	
+	public ArrayList<Equity> getOwnedEquities(){
+		
+		return OwnedEquityData;
+	}
 
 	public static void main(String[] args){
 		
 		ReadFile rf;
 		try {
 			rf = new ReadFile("data.txt");
-			System.out.println(rf.getEquities().toString());
+			System.out.println(rf.getOwnedEquities().toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

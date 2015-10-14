@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Arsh
  *
  */
-public abstract class Account {
+public abstract class Account implements Holdings {
 	
 	/**
 	 * The name of an account

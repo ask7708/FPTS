@@ -8,6 +8,8 @@ public class ReadFileStrategy {
 
 	public ReadFileStrategy(){
 		
+		
+		
 	}
 	
 	public Transaction TransactionRead(String[] temp, ArrayList<Equity> EquityData, ArrayList<Account> AccountData){
@@ -88,7 +90,7 @@ public class ReadFileStrategy {
 		return transfers;
 	}
 	
-	public Equity EquityRead(String[] temp){
+	public Holdings EquityRead(String[] temp){
 		double temp2 = Double.parseDouble(temp[2]);
 		Equity EquityInfo = new Equity(temp[0], temp[1], temp2);
 		for(int x = 3; x < temp.length; x++){
@@ -97,15 +99,16 @@ public class ReadFileStrategy {
 		return EquityInfo;
 	}
 	
-	public Equity OwnedEquityRead(String[] temp){
+	public Holdings OwnedEquityRead(String[] temp){
 		String temp1 = temp[1];
 		String temp2 = temp[2];
 		double temp3 = Double.parseDouble(temp[3]);
-		int temp4 = Integer.parseInt(temp[4]);
+		double temp4 = Double.parseDouble(temp[4]);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		LocalDate Time = LocalDate.parse(temp[5], formatter);
 		Equity EquityInfo = new Equity(temp1, temp2, temp3);
 		for(int x = 6; x < temp.length; x++){
+			System.out.println(temp[x]);
 			EquityInfo.addIndexOrSec(temp[x]);
 		}
 		EquityInfo.setAcquiredShares(temp4);
@@ -115,7 +118,7 @@ public class ReadFileStrategy {
 		
 	}
 	
-	public Account AccountRead(String[] temp){
+	public Holdings AccountRead(String[] temp){
 		String temp1 = temp[1];
 		double temp2 = Double.parseDouble(temp[2]);
 		int temp3 = Integer.parseInt(temp[3]);
