@@ -1,5 +1,8 @@
 package Release1;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -68,20 +71,29 @@ public class Portfolio extends Observable {
    
    public void viewPortfolio(){
 	   	
-	   /***
-	    * Show text file to user
-	    * 
-	    * 
-	    * 
-	    * 
-	    * 
-	    * 
-	    */
+	   System.out.println("ENTERED VIEW PORTFOLIO");
+	   File file = new File(getUsername()+".txt");
+   	
+	   file.setReadOnly();
+	   Desktop desktop = Desktop.getDesktop();
+
 	   
-	   
+	   if(file.exists()){
+		   System.out.println("FILE EXISTS");
+		   try {
+			desktop.open(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   }else{
+		
+		   
+	   }
+	   }
 	   
    }
    
    
    
-}
+
