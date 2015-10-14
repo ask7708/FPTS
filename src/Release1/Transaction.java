@@ -28,10 +28,10 @@ public class Transaction {
 	 */
 	
 	public Transaction(LocalDate time, double amount, Object receiver,Object transfer){
-		time = this.time;
-		amount = this.cash;
-		receiver = this.receiver;
-		transfer = this.transfer;
+		this.time = time;
+		this.cash = amount;
+		this.receiver = receiver;
+		this.transfer = transfer;
 		
 		if(transfer instanceof Account){
 			if(((Account) transfer).getAmount() < cash){

@@ -38,6 +38,8 @@ public class Equity {
 	 */
 	private double eqPrice;
 	
+	private String date;
+	
 	private Stack<Double> priceChanges;
 	
 	/**
@@ -202,6 +204,10 @@ public class Equity {
 	 */
 	public void setAcquiredShares(int acquiredShares) {
 		this.acquiredShares = acquiredShares;
+	}
+	
+	public void setDate(String date){
+		this.date = date;
 	}
 	
 	
