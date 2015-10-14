@@ -13,10 +13,9 @@ import javax.swing.text.NumberFormatter;
 
 public class Simulator extends Observable {
 
+   protected Portfolio portfolio;
    protected Stack<Simulation> simulations;
    protected String username;
-   protected ArrayList<Equity> myHoldings;
-   protected ArrayList<Account> myAccounts;
    private double portfolioVal;
    private LocalDate currentDate;
    
@@ -26,24 +25,33 @@ public class Simulator extends Observable {
     */
    public Simulator(Portfolio portfolio) {
       
-      this.myHoldings = portfolio.getHoldings();
-      this.myAccounts = portfolio.getAccounts();
+//      this.myHoldings = portfolio.getHoldings();
+//      this.myAccounts = portfolio.getAccounts();
       this.simulations = new Stack<Simulation>();
+      this.portfolio = portfolio;
       this.username = portfolio.getUsername();
       this.portfolioVal = 0;
       this.currentDate = LocalDate.now();
    }
+   
    /**
     * 
     * @return
     */
    public LocalDate getDate() { return this.currentDate; }
    
+   public Portfolio returnPortfolio() {
+   
+      for(Equity obj: portfolio.getHoldingsNew()) { obj.putSimulationOff(); }
+      return this.portfolio;
+      
+   }
+   
    public ArrayList<String> getEquitiesShort() {
    
       ArrayList<String> strs = new ArrayList<String>();
       //NumberFormat formatter = NumberFormat.getCurrencyInstance();
-      for(Equity obj: myHoldings) {
+      for(Equity obj: portfolio.getHoldingsNew()) {
          
          String newS = new String();
          newS += obj.getTickSymbol();
@@ -81,7 +89,7 @@ public class Simulator extends Observable {
       
          String newS = new String();
          newS += simulations.get(i).getSimType().toString();
-         newS += " / " + simulations.get(i).getAmount() + " ";
+         newS += " / " + simulations.get(i).getAmount() + " / ";
          
          switch(simulations.get(i).getIntType()) {
             
@@ -155,7 +163,7 @@ public class Simulator extends Observable {
       
       simulations.push(sim);
       
-      for(Equity obj: myHoldings)
+      for(Equity obj: portfolio.getHoldingsNew())
          sim.addInterestEarned(obj);
    }
    
@@ -173,7 +181,7 @@ public class Simulator extends Observable {
       else
          portfolioVal = undo.getOldPVal();
         
-      for(Equity obj: myHoldings) { obj.removePriceChange(); }
+      for(Equity obj: portfolio.getHoldingsNew()) { obj.removePriceChange(); }
       
       return true;  
    }
@@ -191,7 +199,7 @@ public class Simulator extends Observable {
 	      if(!simulations.isEmpty()){
 	    	  return this.simulations.peek().getNewPVal(); 
 	      }else{
-	   	   for(Equity obj: myHoldings){
+	   	   for(Equity obj: portfolio.getHoldingsNew()){
 	   		   oneStock = obj.getAcquiredShares() * obj.getSimulationPrice();
 	   		  totalList.add(oneStock);
 	   	   } 
@@ -225,7 +233,7 @@ public class Simulator extends Observable {
       System.out.println("The value of the Portfolio is "  + simulator.getPortfolioValue());
       
       
-      for(Equity obj: simulator.myHoldings) {
+      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " is $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
@@ -233,7 +241,7 @@ public class Simulator extends Observable {
       
       simulator.addNewSimulation(new Simulation(SimulationType.BULL, 1, Interval.YEAR, 5.00, simulator.getNextSimDate()));
       
-      for(Equity obj: simulator.myHoldings) {
+      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
     	  
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 1 simulation is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
@@ -242,7 +250,7 @@ public class Simulator extends Observable {
       simulator.addNewSimulation(new Simulation(SimulationType.BEAR, 2, Interval.MONTH, 10.00, simulator.getNextSimDate()));
       //System.out.println("The next simulation would start on: " + simulator.getNextSimDate().toString());
       
-      for(Equity obj: simulator.myHoldings) {
+      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 2 simulations is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
@@ -267,7 +275,7 @@ public class Simulator extends Observable {
 //      
 //      simulator.removeOneSimulation();
 //      
-      for(Equity obj: simulator.myHoldings) {
+      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));

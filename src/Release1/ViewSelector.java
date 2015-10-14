@@ -15,14 +15,16 @@ public class ViewSelector extends JFrame {
 //   ViewSelector vs = (ViewSelector)c;
 //   vs.makeTransition("REGISTER");
    
-	private Portfolio portfolio;
+//	private Portfolio portfolio;
 	private View currentView;
-	private PortfolioController portCont;
+//	private PortfolioController portCont;
 		
 	public ViewSelector() {
 		
 		setSize(800, 500);
 		setVisible(true);
+	   setTitle("Financial Portfolio Tracking System - Login");
+
 	}
 	
 	/*
@@ -48,27 +50,60 @@ public class ViewSelector extends JFrame {
 	   }
 	}*/
 	
-	public void makeTransition(String viewType, User someUser) {
-		   
-
-		   currentView.hideScreen();
-		   
-		   switch(viewType) {
-		   
-		      case "LOGIN":
-		         setCurrent(new LoginView());
-		         break;
-		      case "SIMULATION":
-		         setCurrent(new SimulatorView(new Simulator(portfolio)));
-		         break;
-		      case "REGISTER":
-		         setCurrent(new RegisterView());
-		         break;
-		      default:
-		         setCurrent(new DashboardView(someUser));
-		         break;
-		   }
-		}
+//	public void makeTransition(String viewType, User someUser) {
+//		   
+//
+//		   currentView.hideScreen();
+//		   
+//		   switch(viewType) {
+//		   
+//		      case "LOGIN":
+//		         setCurrent(new LoginView());
+//		         break;
+//		      case "SIMULATION":
+//		         setCurrent(new SimulatorView(new Simulator(portfolio)));
+//		         break;
+//		      case "REGISTER":
+//		         setCurrent(new RegisterView());
+//		         break;
+//		      default:
+//		         setCurrent(new DashboardView(someUser));
+//		         break;
+//		   }
+//		}
+	
+	public void makeTransition(String viewType, Object data) {
+	   
+	   currentView.hideScreen();
+	   
+	   switch(viewType) {
+	   
+	      case "LOGIN":
+	         LoginView lv = new LoginView();
+	         lv.getData(data);
+	         setCurrent(lv);
+	         break;
+	      case "SIMULATION":
+	         SimulatorView sv = new SimulatorView();
+	         this.setTitle("Financial Portfolio Tracking System - Simulation");
+	         sv.getData(data);
+	         setCurrent(sv);
+	         break;
+	      case "REGISTER":
+	         RegisterView rv = new RegisterView();
+	         this.setTitle("Financial Portfolio Tracking System - Register");
+	         rv.getData(data);
+	         setCurrent(rv);
+	         break;
+	      default:
+	         DashboardView dv = new DashboardView();
+	         this.setTitle("Financial Portfolio Tracking System - Dashboard");
+	         dv.getData(data);
+	         setCurrent(dv);
+	         break;
+	         
+	   }    
+	}
 	
 	public void setCurrent(View obj) {
 	   
