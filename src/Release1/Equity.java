@@ -31,7 +31,7 @@ public class Equity {
 	 * Number of shares the user holds 
 	 * 
 	 */
-	private int acquiredShares;
+	private double acquiredShares;
 	
 	/**
 	 * The price of the equity
@@ -55,6 +55,7 @@ public class Equity {
 		this.tickSymbol = tickSymbol;
 		this.eqPrice = eqPrice;
 		
+		this.acquiredShares = 0;
 		this.indexOrSec = new ArrayList<String>();
 		this.priceChanges = null;
 	}
@@ -138,7 +139,7 @@ public class Equity {
 	 * Returns the number of shares acquired
 	 * @return
 	 */
-	public int getAcquiredShares() {
+	public double getAcquiredShares() {
 		return acquiredShares;
 	}
 
@@ -173,7 +174,7 @@ public class Equity {
 	 * Sets the number of shares acquired
 	 * @param acquiredShares
 	 */
-	public void setAcquiredShares(int acquiredShares) {
+	public void setAcquiredShares(double acquiredShares) {
 		this.acquiredShares = acquiredShares;
 	}
 	
