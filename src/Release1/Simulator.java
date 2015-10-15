@@ -221,8 +221,8 @@ public class Simulator extends Observable {
       Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
       e2.setAcquiredShares(20);
       
-      portfolio.addHolding(e1);
-      portfolio.addHolding(e2);
+      portfolio.addEquity(e1);
+      portfolio.addEquity(e2);
       
       Simulator simulator = new Simulator(portfolio);
       ArrayList<String> eq = simulator.getEquitiesShort();
