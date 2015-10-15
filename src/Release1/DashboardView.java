@@ -36,9 +36,9 @@ public class DashboardView extends View {
 	private JPanel cardPanel, dashPanel, accountPanel, mainPanel, portfolioPanel, holdingsPanel;
 	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel, addHoldingsLabel;
 	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, addHoldingsButton;
-	private CardLayout cardLayout = new CardLayout();
-	Portfolio portObj;
-	JFrame frame;
+	private Portfolio portObj;
+	private Market markObj;
+	JFrame frame, marketFrame;
 	
 	private User someUser;
 	private Portfolio portfolio;
@@ -60,7 +60,7 @@ public class DashboardView extends View {
 
 		cardPanel = new JPanel();
 		mainPanel = new JPanel();
-		cardPanel.setLayout(cardLayout);
+		//cardPanel.setLayout(cardLayout);
 
 		dashPanel = new JPanel();
 		accountPanel = new JPanel();
@@ -68,10 +68,10 @@ public class DashboardView extends View {
 		holdingsPanel = new JPanel();
 
 		dahboardLabel = new JLabel("");
-		accountLabel = new JLabel("Account Details");
-		portfolioLabel = new JLabel("Manage Your Portfolio");
-		holdingsLabel = new JLabel("Manage Your Holdings");
-		addHoldingsLabel = new JLabel("Add Equities");
+		//accountLabel = new JLabel("Account Details");
+		//portfolioLabel = new JLabel("Manage Your Portfolio");
+		//holdingsLabel = new JLabel("Manage Your Holdings");
+		//addHoldingsLabel = new JLabel("Add Equities");
 
 		dashPanel.add(dahboardLabel);
 		accountPanel.add(accountLabel);
@@ -92,14 +92,14 @@ public class DashboardView extends View {
 		dashboardButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "1");
+				//cardLayout.show(cardPanel, "1");
 			}
 		});
 		accountButton = new JButton("View Your Account");
 		accountButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "2");
+				//cardLayout.show(cardPanel, "2");
 			}
 		});
 
@@ -107,7 +107,7 @@ public class DashboardView extends View {
 		portfolioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "3");
+				//cardLayout.show(cardPanel, "3");
 				Portfolio portObj = new Portfolio(getUserAfterLogin());
 				portObj.viewOwnedEquities(); /*
 												 * Show text file of portfolio
@@ -121,7 +121,7 @@ public class DashboardView extends View {
 		holdingsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "4");
+				//cardLayout.show(cardPanel, "4");
 				/**
 				 * Show the list of holdings the user currently has
 				 * 
@@ -154,7 +154,7 @@ public class DashboardView extends View {
 
 		cardPanel = new JPanel();
 		mainPanel = new JPanel();
-		cardPanel.setLayout(cardLayout);
+		//cardPanel.setLayout(cardLayout);
 
 		dashPanel = new JPanel();
 		accountPanel = new JPanel();
@@ -162,20 +162,20 @@ public class DashboardView extends View {
 		holdingsPanel = new JPanel();
 
 		dahboardLabel = new JLabel("");
-		accountLabel = new JLabel("Account Details");
-		portfolioLabel = new JLabel("Manage Your Portfolio");
-		holdingsLabel = new JLabel("Manage Your Holdings");
-		addHoldingsLabel = new JLabel("Add equity");
+		//accountLabel = new JLabel("Account Details");
+		//portfolioLabel = new JLabel("Manage Your Portfolio");
+		//holdingsLabel = new JLabel("Manage Your Holdings");
+		//addHoldingsLabel = new JLabel("Add equity");
 
-		dashPanel.add(dahboardLabel);
-		accountPanel.add(accountLabel);
-		portfolioPanel.add(portfolioLabel);
-		holdingsPanel.add(holdingsLabel);
+		//dashPanel.add(dahboardLabel);
+		//accountPanel.add(accountLabel);
+		//portfolioPanel.add(portfolioLabel);
+		//holdingsPanel.add(holdingsLabel);
 
-		cardPanel.add(dashPanel, "1");
-		cardPanel.add(accountPanel, "2");
-		cardPanel.add(portfolioPanel, "3");
-		cardPanel.add(holdingsPanel, "4");
+		//cardPanel.add(dashPanel, "1");
+		//cardPanel.add(accountPanel, "2");
+		//cardPanel.add(portfolioPanel, "3");
+		//cardPanel.add(holdingsPanel, "4");
 
 		dashboardButton = new JButton("Dash Board");
 
@@ -186,14 +186,14 @@ public class DashboardView extends View {
 		dashboardButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "1");
+				//cardLayout.show(cardPanel, "1");
 			}
 		});
 		accountButton = new JButton("View Your Account");
 		accountButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "2");
+				//cardLayout.show(cardPanel, "2");
 			}
 		});
 
@@ -202,7 +202,7 @@ public class DashboardView extends View {
 		portfolioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "3");
+				//cardLayout.show(cardPanel, "3");
 				portObj = new Portfolio(getUserAfterLogin());
 				portObj.viewOwnedEquities();
 
@@ -321,7 +321,7 @@ public class DashboardView extends View {
 		holdingsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(cardPanel, "4");
+				//cardLayout.show(cardPanel, "4");
 				/**
 				 * Show the list of holdings the user currently has
 				 * 
@@ -330,19 +330,63 @@ public class DashboardView extends View {
 			}
 		});
 
-		addHoldingsButton = new JButton("Add an equity");
+		addHoldingsButton = new JButton("Purchase an Equity");
 		addHoldingsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
-				int selectedOption = JOptionPane.showConfirmDialog(null, "Is your holding purchased from FPTS?",
-						"Choose", JOptionPane.YES_NO_OPTION);
-				if (selectedOption == JOptionPane.NO_OPTION) {
+				marketFrame = new JFrame("Equity Market");
 
-				} else {
+				markObj = new Market();
+				markObj.viewMarketEquities();
+				// Creates a menubar for a JFrame
+				JMenuBar menuBar = new JMenuBar();
 
-					JOptionPane.showMessageDialog(null, "The system does not currently support this Feature.");
+				String col[] = { "Tick Symbol", "Name", "Price" };
+				
+				
+				/*
+				 * Table is made with 0 rows because we wanted add from our list
+				 * of equities
+				 */
+				DefaultTableModel tableMarketModel = new DefaultTableModel(col, 0);
+
+				JTable marketTable = new JTable(tableMarketModel);
+
+				for (int i = 0; i < markObj.getMarketEquities().size(); i++) {
+					String tickSym = markObj.getMarketEquities().get(i).getTickSymbol();
+					String name = markObj.getMarketEquities().get(i).getName();
+					double price = markObj.getMarketEquities().get(i).getSharePrice();
+					//String date = portObj.getHoldingsNew().get(i).getDate();
+					// int draws = portObj.getHoldingsNew().get(i).getDraws();
+
+					Object[] data = { tickSym, name, price};
+
+					tableMarketModel.addRow(data);
+
 				}
+
+				// Add the menubar to the frame
+				marketFrame.setJMenuBar(menuBar);
+
+				// Define and add two drop down menu to the menubar
+				JMenu fileMenu = new JMenu("Options");
+				menuBar.add(fileMenu);
+				JMenuItem buyEquity = new JMenuItem("Buy Equity");
+				fileMenu.add(buyEquity);
+
+
+				JPanel panel = new JPanel();
+				panel.setLayout(new BorderLayout());
+
+				JScrollPane tableContainer = new JScrollPane(marketTable);
+				
+				panel.add(tableContainer, BorderLayout.CENTER);
+				marketFrame.getContentPane().add(panel);
+
+				marketFrame.pack();
+				marketFrame.setVisible(true);
+				
 
 			}
 		});

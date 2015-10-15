@@ -208,8 +208,45 @@ public class Portfolio extends Observable {
 		dataRead.close();
 	   
 	   
-	  }
+}
    		
+   
+   public void viewAccounts() {
+		   
+	   //
+	   
+		File data = new File(user.getUsername()+".txt");
+		Scanner dataRead = null;
+		try {
+			dataRead = new Scanner(data);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String line;
+		String[] temp;
+		
+		while (dataRead.hasNextLine())
+		{
+      	line = dataRead.nextLine();
+      	line = line.replace("\"", "");
+      	line = line.replace(", ", "");
+      	temp = line.split(",");
+      	ReadHoldingsContext readOwnedEquity = new ReadHoldingsContext(new ReadOwnedEquities());
+      	
+      	if(temp[0].equals("!OWNED")){
+      			Equity OwnedEquityInfo = (Equity) readOwnedEquity.executeStrategy(temp);
+      			ownedEquities.add(OwnedEquityInfo);
+      		}
+      		
+      	}
+		   
+		dataRead.close();
+	   
+	   
+}   
+   
 	/*************TEST*********************/
    public static void main(String[] args){
 	   
