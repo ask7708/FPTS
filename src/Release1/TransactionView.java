@@ -18,26 +18,26 @@ public class TransactionView {
 		
 	}
 	
-	void textDisplay(File text){
-		yourButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-			try {
-			JTextArea ta = new JTextArea(20, 60);
-			ta.read(new FileReader(text), null);
-			ta.setEditable(false);
-			JOptionPane.showMessageDialog(yourButton, new JScrollPane(ta));
-			}
-			catch (IOException ioe) {
-			ioe.printStackTrace();
-			}
-			}
-			
-			public void main(String[] args){
-				
-				
-			}
-
-			
-			});
-	}
+//	void textDisplay(File text){
+//		yourButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent ae) {
+//			try {
+//			JTextArea ta = new JTextArea(20, 60);
+//			ta.read(new FileReader(text), null);
+//			ta.setEditable(false);
+//			JOptionPane.showMessageDialog(yourButton, new JScrollPane(ta));
+//			}
+//			catch (IOException ioe) {
+//			ioe.printStackTrace();
+//			}
+//			}
+//			
+//			public void main(String[] args){
+//				
+//				
+//			}
+//
+//			
+//			});
+//	}
 }
