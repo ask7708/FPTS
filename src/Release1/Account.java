@@ -2,6 +2,7 @@
  * 
  */
 package Release1;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -122,6 +123,13 @@ public abstract class Account implements Holdings {
 		this.date = date;
 	}
 	
+	public String genretRoutingNumber(File file){
+		String rNumber = "";
+		
+		
+		
+		return rNumber; 
+	}
 	
 	/* Testing some methods within account class
 	 * ***DO NOT ERASE***
