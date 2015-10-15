@@ -160,6 +160,8 @@ public abstract class Account implements Holdings {
 	      	line = line.replace("\"", "");
 	      	line = line.replace(", ", "");
 	      	temp = line.split(",");
+	      	
+	      	
 	      	//ReadHoldingsContext readAccount = new ReadHoldingsContext(new ReadAccountHolding());
 	      	
 	      	if(temp[0].equals("!BANK")){
