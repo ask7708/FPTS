@@ -27,9 +27,9 @@ public class DashboardView extends View {
 	 *            the user's portfolio
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel cardPanel, dashPanel, accountPanel, mainPanel, portfolioPanel, holdingsPanel;
-	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel;
-	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton;
+	private JPanel cardPanel, dashPanel, accountPanel, mainPanel, portfolioPanel, holdingsPanel, testPanel;
+	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel, testLabel;
+	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, testButton;
 	private CardLayout cardLayout = new CardLayout();
 
 	private User someUser;
@@ -57,22 +57,27 @@ public class DashboardView extends View {
 		accountPanel = new JPanel();
 		portfolioPanel = new JPanel();
 		holdingsPanel = new JPanel();
-
+		testPanel = new JPanel();
+		
 		dahboardLabel = new JLabel("");
 		accountLabel = new JLabel("Account Details");
 		portfolioLabel = new JLabel("Manage Your Portfolio");
 		holdingsLabel = new JLabel("Manage Your Holdings");
-
+		testLabel = new JLabel("this is only test");
+		
 		dashPanel.add(dahboardLabel);
 		accountPanel.add(accountLabel);
 		portfolioPanel.add(portfolioLabel);
 		holdingsPanel.add(holdingsLabel);
-
+		testPanel.add(testLabel);
+		
+		
 		cardPanel.add(dashPanel, "1");
 		cardPanel.add(accountPanel, "2");
 		cardPanel.add(portfolioPanel, "3");
 		cardPanel.add(holdingsPanel, "4");
-
+		cardPanel.add(testPanel, "5");
+		
 		dashboardButton = new JButton("Dash Board");
 
 		// helloText.setBounds(150, 50, 80, 25);
@@ -117,7 +122,21 @@ public class DashboardView extends View {
 
 			}
 		});
+		
+		testButton = new JButton("Test Button");
 
+		// helloText.setBounds(150, 50, 80, 25);
+		// JButton logoutButton = new JButton("Log Out!");
+
+		testPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		testButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "6");
+			}
+		});
+		
+		
 		/**
 		 * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
 		 * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
@@ -128,6 +147,7 @@ public class DashboardView extends View {
 		mainPanel.add(accountButton);
 		mainPanel.add(portfolioButton);
 		mainPanel.add(holdingsButton);
+		mainPanel.add(testButton);
 		this.screen.add(cardPanel, BorderLayout.NORTH);
 		this.screen.add(mainPanel, BorderLayout.SOUTH);
 		this.screen.setSize(600, 600);
@@ -144,90 +164,114 @@ public class DashboardView extends View {
 
 	public void buildJFrame() {
 		      
-	      cardPanel = new JPanel();
-	      mainPanel = new JPanel();
-	      cardPanel.setLayout(cardLayout);
+		
+		//this.screen.setTitle("FPTS - " + portfolio.getUsername() + " - Home");
 
-	      dashPanel = new JPanel();
-	      accountPanel = new JPanel();
-	      portfolioPanel = new JPanel();
-	      holdingsPanel = new JPanel();
+		this.someUser = someUser;
+		
+		cardPanel = new JPanel();
+		mainPanel = new JPanel();
+		cardPanel.setLayout(cardLayout);
 
-	      dahboardLabel = new JLabel("");
-	      accountLabel = new JLabel("Account Details");
-	      portfolioLabel = new JLabel("Manage Your Portfolio");
-	      holdingsLabel = new JLabel("Manage Your Holdings");
+		dashPanel = new JPanel();
+		accountPanel = new JPanel();
+		portfolioPanel = new JPanel();
+		holdingsPanel = new JPanel();
+		testPanel = new JPanel();
+		
+		dahboardLabel = new JLabel("");
+		accountLabel = new JLabel("Account Details");
+		portfolioLabel = new JLabel("Manage Your Portfolio");
+		holdingsLabel = new JLabel("Manage Your Holdings");
+		testLabel = new JLabel("this is only test");
+		
+		dashPanel.add(dahboardLabel);
+		accountPanel.add(accountLabel);
+		portfolioPanel.add(portfolioLabel);
+		holdingsPanel.add(holdingsLabel);
+		testPanel.add(testLabel);
+		
+		
+		cardPanel.add(dashPanel, "1");
+		cardPanel.add(accountPanel, "2");
+		cardPanel.add(portfolioPanel, "3");
+		cardPanel.add(holdingsPanel, "4");
+		cardPanel.add(testPanel, "5");
+		
+		dashboardButton = new JButton("Dash Board");
 
-	      dashPanel.add(dahboardLabel);
-	      accountPanel.add(accountLabel);
-	      portfolioPanel.add(portfolioLabel);
-	      holdingsPanel.add(holdingsLabel);
+		// helloText.setBounds(150, 50, 80, 25);
+		// JButton logoutButton = new JButton("Log Out!");
 
-	      cardPanel.add(dashPanel, "1");
-	      cardPanel.add(accountPanel, "2");
-	      cardPanel.add(portfolioPanel, "3");
-	      cardPanel.add(holdingsPanel, "4");
+		dashPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		dashboardButton.addActionListener(new ActionListener() {
 
-	      dashboardButton = new JButton("Dash Board");
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "1");
+			}
+		});
+		accountButton = new JButton("View Your Account");
+		accountButton.addActionListener(new ActionListener() {
 
-	      // helloText.setBounds(150, 50, 80, 25);
-	      // JButton logoutButton = new JButton("Log Out!");
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "2");
+			}
+		});
 
-	      dashPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-	      dashboardButton.addActionListener(new ActionListener() {
+		portfolioButton = new JButton("View Your Portfolio");
+		portfolioButton.addActionListener(new ActionListener() {
 
-	         public void actionPerformed(ActionEvent e) {
-	            cardLayout.show(cardPanel, "1");
-	         }
-	      });
-	      accountButton = new JButton("View Your Account");
-	      accountButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "3");
+				Portfolio portObj = new Portfolio(getUserAfterLogin());
+				portObj.viewPortfolio(); /*Show text file of portfolio to user*/
 
-	         public void actionPerformed(ActionEvent e) {
-	            cardLayout.show(cardPanel, "2");
-	         }
-	      });
+			}
+		});
+		
 
-	      portfolioButton = new JButton("View Your Portfolio");
-	      portfolioButton.addActionListener(new ActionListener() {
+		holdingsButton = new JButton("Manage Your Holding");
+		holdingsButton.addActionListener(new ActionListener() {
 
-	         public void actionPerformed(ActionEvent e) {
-	            cardLayout.show(cardPanel, "3");
-	            Portfolio portObj = new Portfolio(getUserAfterLogin());
-	            portObj.viewPortfolio(); /*Show text file of portfolio to user*/
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "4");
+				/**
+				 * Show the list of holdings the user currently has
+				 * 
+				 */
 
-	         }
-	      });
-	      
+			}
+		});
+		
+		testButton = new JButton("Test Button");
 
-	      holdingsButton = new JButton("Manage Your Holding");
-	      holdingsButton.addActionListener(new ActionListener() {
+		// helloText.setBounds(150, 50, 80, 25);
+		// JButton logoutButton = new JButton("Log Out!");
 
-	         public void actionPerformed(ActionEvent e) {
-	            cardLayout.show(cardPanel, "4");
-	            /**
-	             * Show the list of holdings the user currently has
-	             * 
-	             */
+		testPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		testButton.addActionListener(new ActionListener() {
 
-	         }
-	      });
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(cardPanel, "6");
+			}
+		});
+		
+		
+		/**
+		 * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
+		 * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
+		 * mainPanel.add(dateNow);
+		 **/
 
-	      /**
-	       * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
-	       * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
-	       * mainPanel.add(dateNow);
-	       **/
-
-	      mainPanel.add(dashboardButton);
-	      mainPanel.add(accountButton);
-	      mainPanel.add(portfolioButton);
-	      mainPanel.add(holdingsButton);
-	      this.screen.add(cardPanel, BorderLayout.NORTH);
-	      this.screen.add(mainPanel, BorderLayout.SOUTH);
-	      this.screen.setSize(600, 600);   
+		mainPanel.add(dashboardButton);
+		mainPanel.add(accountButton);
+		mainPanel.add(portfolioButton);
+		mainPanel.add(holdingsButton);
+		mainPanel.add(testButton);
+		this.screen.add(cardPanel, BorderLayout.NORTH);
+		this.screen.add(mainPanel, BorderLayout.SOUTH);
+		this.screen.setSize(600, 600);
 	}
-	
    @Override
    public void update(Observable o, Object arg) {
       // TODO Auto-generated method stub
