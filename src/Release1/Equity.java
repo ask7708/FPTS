@@ -227,7 +227,7 @@ public class Equity implements Holdings {
 	
 	
 	/**
-	 * 
+	 * Creates a toString method to print out an Equity Object
 	 * 
 	 */
 	public String toString(){
