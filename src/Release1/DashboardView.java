@@ -37,7 +37,9 @@ public class DashboardView extends View {
 	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel, addHoldingsLabel;
 	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, addHoldingsButton;
 	private CardLayout cardLayout = new CardLayout();
-
+	Portfolio portObj;
+	JFrame frame;
+	
 	private User someUser;
 	private Portfolio portfolio;
 
@@ -196,16 +198,17 @@ public class DashboardView extends View {
 		});
 
 		portfolioButton = new JButton("View Your Owned Equities");
+
 		portfolioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(cardPanel, "3");
-				Portfolio portObj = new Portfolio(getUserAfterLogin());
+				portObj = new Portfolio(getUserAfterLogin());
 				portObj.viewOwnedEquities();
 
 				ArrayList<Equity> equityToAdd = new ArrayList<Equity>();
 
-				JFrame frame = new JFrame("Owned Equities");
+				frame = new JFrame("Owned Equities");
 
 				// Creates a menubar for a JFrame
 				JMenuBar menuBar = new JMenuBar();
