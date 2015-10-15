@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 
 public class WriteFile {
 	
@@ -35,16 +36,18 @@ public class WriteFile {
 		boolean successful = tempFile.renameTo(inputFile);
 	}
 	
-	public void writeFile1(String line, File data) throws IOException {
+	public void writeFileToPortfolio(String line, File data, String userName) throws IOException {
+
 		File fout = data;
 		FileOutputStream fos = new FileOutputStream(fout);
 	 
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-	 
-		for (int i = 0; i < 10; i++) {
-			bw.write(line);
-			bw.newLine();
-		}
+
+		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(userName+".txt", true)));
+		out.println(line+",");
+		out.close();
+		
+		
 	 
 		bw.close();
 	}

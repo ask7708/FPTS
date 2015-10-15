@@ -69,16 +69,16 @@ public class SimulatorView extends View {
 	      //stockPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 	      
 //	      StringBuilder builder = new StringBuilder(simulator.myHoldings.size());
-	      StringBuilder builder = new StringBuilder(simulator.portfolio.getHoldingsNew().size());
+	      StringBuilder builder = new StringBuilder(simulator.holdings.size());
 	      
 //	      for (int i=0;i<simulator.myHoldings.size();builder.append(simulator.myHoldings.get(i++))) builder.append("\n");
-	      for (int i=0; i<simulator.portfolio.getHoldingsNew().size();builder.append(simulator.portfolio.getHoldingsNew().get(i++))) builder.append("\n");
+	      for (int i=0; i<simulator.holdings.size();builder.append(simulator.holdings.get(i++))) builder.append("\n");
 	      JOptionPane.showMessageDialog(null, builder.toString(), "Printing results", JOptionPane.INFORMATION_MESSAGE);
 	      
 	      
 	      
 //	      JLabel holdings = new JLabel(simulator.myHoldings.toString());
-	      JLabel holdings = new JLabel(simulator.portfolio.getHoldingsNew().toString());
+	      JLabel holdings = new JLabel(simulator.holdings.toString());
 	      stockPanel.add(holdings);
 	      stockButton.addActionListener(new ActionListener() {
 
@@ -118,8 +118,8 @@ public class SimulatorView extends View {
 	      Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
 	      e2.setAcquiredShares(20);
 	      
-	      portfolio.addHolding(e1);
-	      portfolio.addHolding(e2);
+	      portfolio.addEquity(e1);
+	      portfolio.addEquity(e2);
 	      
 	      //Simulator simulator = new Simulator();
 	      
@@ -136,7 +136,7 @@ public class SimulatorView extends View {
    @Override
    public void getData(Object sim) {
       
-      Portfolio pv = (Portfolio) sim;
+      String pv = (String) sim;
       simulator = new Simulator(pv);
       simulator.addObserver(this);
             

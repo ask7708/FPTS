@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  *
  *
  */
-public class ReadAccountHolding implements ReadHoldingsStrategy {
+public class ReadAccountHolding extends ReadHoldingsStrategy {
 
 	@Override
 	public Holdings readHolding(String[] temp) {

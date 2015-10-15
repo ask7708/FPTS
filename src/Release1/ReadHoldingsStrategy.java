@@ -3,11 +3,18 @@
  */
 package Release1;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * @author Arsh
  *
  */
-public interface ReadHoldingsStrategy {
+public abstract class ReadHoldingsStrategy {
+	
+	
 	
 	/**
 	 * Reads different types of holdings such
@@ -17,6 +24,6 @@ public interface ReadHoldingsStrategy {
 	 * @param temp
 	 * @return
 	 */
-	public Holdings readHolding(String[] temp);
+	public abstract Holdings readHolding(String[] temp);
 
 }

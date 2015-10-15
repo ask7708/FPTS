@@ -1,5 +1,6 @@
 package Release1;
 
+import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -13,7 +14,9 @@ import javax.swing.text.NumberFormatter;
 
 public class Simulator extends Observable {
 
-   protected Portfolio portfolio;
+   //protected Portfolio portfolio;
+   protected ArrayList<Equity> holdings;
+   protected ArrayList<Account> accounts;
    protected Stack<Simulation> simulations;
    protected String username;
    private double portfolioVal;
@@ -23,13 +26,28 @@ public class Simulator extends Observable {
     * 
     * @param portfolio
     */
-   public Simulator(Portfolio portfolio) {
+   public Simulator(String username) {
       
-//      this.myHoldings = portfolio.getHoldings();
-//      this.myAccounts = portfolio.getAccounts();
       this.simulations = new Stack<Simulation>();
-      this.portfolio = portfolio;
-      this.username = portfolio.getUsername();
+      this.username = username;
+
+      String fName = username.concat(".txt");
+      try {
+         
+         ReadFile fileReader = new ReadFile(fName);
+         this.holdings = fileReader.getOwnedEquities();
+         
+         for(Equity obj: holdings)
+              obj.putSimulationOn();
+         
+         this.accounts = fileReader.getAllAccounts();
+
+      } catch(FileNotFoundException ex) {
+         
+         System.err.println("The file is not found");
+         
+      }
+      
       this.portfolioVal = 0;
       this.currentDate = LocalDate.now();
    }
@@ -40,18 +58,18 @@ public class Simulator extends Observable {
     */
    public LocalDate getDate() { return this.currentDate; }
    
-   public Portfolio returnPortfolio() {
-   
-      for(Equity obj: portfolio.getHoldingsNew()) { obj.putSimulationOff(); }
-      return this.portfolio;
-      
-   }
+//   public Portfolio returnPortfolio() {
+//   
+//      for(Equity obj: portfolio.getHoldingsNew()) { obj.putSimulationOff(); }
+//      return this.portfolio;
+//      
+//   }
    
    public ArrayList<String> getEquitiesShort() {
    
       ArrayList<String> strs = new ArrayList<String>();
       //NumberFormat formatter = NumberFormat.getCurrencyInstance();
-      for(Equity obj: portfolio.getHoldingsNew()) {
+      for(Equity obj: this.holdings) {
          
          String newS = new String();
          newS += obj.getTickSymbol();
@@ -163,7 +181,7 @@ public class Simulator extends Observable {
       
       simulations.push(sim);
       
-      for(Equity obj: portfolio.getHoldingsNew())
+      for(Equity obj: this.holdings)
          sim.addInterestEarned(obj);
    }
    
@@ -181,7 +199,7 @@ public class Simulator extends Observable {
       else
          portfolioVal = undo.getOldPVal();
         
-      for(Equity obj: portfolio.getHoldingsNew()) { obj.removePriceChange(); }
+      for(Equity obj: this.holdings) { obj.removePriceChange(); }
       
       return true;  
    }
@@ -199,7 +217,7 @@ public class Simulator extends Observable {
 	      if(!simulations.isEmpty()){
 	    	  return this.simulations.peek().getNewPVal(); 
 	      }else{
-	   	   for(Equity obj: portfolio.getHoldingsNew()){
+	   	   for(Equity obj: this.holdings){
 	   		   oneStock = obj.getAcquiredShares() * obj.getSimulationPrice();
 	   		  totalList.add(oneStock);
 	   	   } 
@@ -211,6 +229,7 @@ public class Simulator extends Observable {
    }
    
    public static void main(String[] args) {
+
       
       User me = new User("dxr5716", "me");
       
@@ -221,19 +240,28 @@ public class Simulator extends Observable {
       Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
       e2.setAcquiredShares(20);
       
-      portfolio.addHolding(e1);
-      portfolio.addHolding(e2);
+      portfolio.addEquity(e1);
+      portfolio.addEquity(e2);
       
-      Simulator simulator = new Simulator(portfolio);
+//      
+//      User me = new User("dxr5716", "me");
+//      
+//      Portfolio portfolio = new Portfolio(me);
+//      
+//      Equity e1 = new Equity("GOOG", "Google Inc.", 100.00);
+//      e1.setAcquiredShares(50);
+//      Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
+//      e2.setAcquiredShares(20);
+//      
+//      portfolio.addHolding(e1);
+//      portfolio.addHolding(e2);
+//      
+      Simulator simulator = new Simulator("data");
       ArrayList<String> eq = simulator.getEquitiesShort();
-      
-      for(String obj: eq)
-         System.out.println(obj);
-      
+            
       System.out.println("The value of the Portfolio is "  + simulator.getPortfolioValue());
       
-      
-      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
+      for(Equity obj: simulator.holdings) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " is $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
@@ -241,7 +269,7 @@ public class Simulator extends Observable {
       
       simulator.addNewSimulation(new Simulation(SimulationType.BULL, 1, Interval.YEAR, 5.00, simulator.getNextSimDate()));
       
-      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
+      for(Equity obj: simulator.holdings) {
     	  
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 1 simulation is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
@@ -250,7 +278,7 @@ public class Simulator extends Observable {
       simulator.addNewSimulation(new Simulation(SimulationType.BEAR, 2, Interval.MONTH, 10.00, simulator.getNextSimDate()));
       //System.out.println("The next simulation would start on: " + simulator.getNextSimDate().toString());
       
-      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
+      for(Equity obj: simulator.holdings) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " after 2 simulations is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
@@ -275,13 +303,11 @@ public class Simulator extends Observable {
 //      
 //      simulator.removeOneSimulation();
 //      
-      for(Equity obj: simulator.portfolio.getHoldingsNew()) {
+      for(Equity obj: simulator.holdings) {
          
          System.out.println("The price of a share at " + obj.getTickSymbol() + " is now $" + 
                (String.format("%.02f", obj.getSimulationPrice())));
       }
       
-   }
-
-   
+   }   
 }

@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Arsh
  *
  */
-public class ReadOwnedEquities implements ReadHoldingsStrategy {
+public class ReadOwnedEquities extends ReadHoldingsStrategy {
 
 	@Override
 	public Holdings readHolding(String[] temp) {
@@ -22,7 +22,6 @@ public class ReadOwnedEquities implements ReadHoldingsStrategy {
 		LocalDate Time = LocalDate.parse(temp[5], formatter);
 		Equity EquityInfo = new Equity(temp1, temp2, temp3);
 		for(int x = 6; x < temp.length; x++){
-			System.out.println(temp[x]);
 			EquityInfo.addIndexOrSec(temp[x]);
 		}
 		EquityInfo.setAcquiredShares(temp4);

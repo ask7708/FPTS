@@ -7,7 +7,7 @@ package Release1;
  * @author Arsh
  *
  */
-public class ReadEquitiesRaw implements ReadHoldingsStrategy {
+public class ReadEquitiesRaw extends ReadHoldingsStrategy {
 
 	@Override
 	public Holdings readHolding(String[] temp) {

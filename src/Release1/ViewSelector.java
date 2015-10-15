@@ -75,34 +75,37 @@ public class ViewSelector extends JFrame {
 	public void makeTransition(String viewType, Object data) {
 	   
 	   currentView.hideScreen();
+	    
+	   if(viewType.equals("LOGIN")) {
+	      
+	      LoginView lv = new LoginView();
+	      lv.getData(data);
+	      setCurrent(lv);
+	   }
 	   
-	   switch(viewType) {
+	   else if(viewType.equals("SIMULATION")) {
+	      
+	      SimulatorView sv = new SimulatorView();
+         this.setTitle("Financial Portfolio Tracking System - Simulation");
+         sv.getData(data);
+         setCurrent(sv);
+	   }
 	   
-	      case "LOGIN":
-	         LoginView lv = new LoginView();
-	         lv.getData(data);
-	         setCurrent(lv);
-	         break;
-	      case "SIMULATION":
-	         SimulatorView sv = new SimulatorView();
-	         this.setTitle("Financial Portfolio Tracking System - Simulation");
-	         sv.getData(data);
-	         setCurrent(sv);
-	         break;
-	      case "REGISTER":
-	         RegisterView rv = new RegisterView();
-	         this.setTitle("Financial Portfolio Tracking System - Register");
-	         rv.getData(data);
-	         setCurrent(rv);
-	         break;
-	      default:
-	         DashboardView dv = new DashboardView();
-	         this.setTitle("Financial Portfolio Tracking System - Dashboard");
-	         dv.getData(data);
-	         setCurrent(dv);
-	         break;
-	         
-	   }    
+	   else if(viewType.equals("REGISTER")) {
+	      
+	      RegisterView rv = new RegisterView();
+         this.setTitle("Financial Portfolio Tracking System - Register");
+         rv.getData(data);
+         setCurrent(rv);
+	   }
+	   
+	   else {
+	      
+         DashboardView dv = new DashboardView();
+         this.setTitle("Financial Portfolio Tracking System - Dashboard");
+         dv.getData(data);
+         setCurrent(dv);
+	   }
 	}
 	
 	public void setCurrent(View obj) {

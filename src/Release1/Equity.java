@@ -55,6 +55,7 @@ public class Equity implements Holdings {
 		this.tickSymbol = tickSymbol;
 		this.eqPrice = eqPrice;
 		
+		this.date = null;
 		this.acquiredShares = 0;
 		this.indexOrSec = new ArrayList<String>();
 		this.priceChanges = null;
@@ -211,28 +212,50 @@ public class Equity implements Holdings {
 		this.date = date;
 	}
 	
+	public String getDate(){
+		return this.date;
+	}
+	
+	public Equity findEquity(String marketFile, String tickSymbol){
+		
+		
+		
+		
+		
+		return null;
+	}
+	
 	
 	/**
-	 * 
+	 * Creates a toString method to print out an Equity Object
 	 * 
 	 */
 	public String toString(){
 		
 		 String newS = new String();
          newS += this.getTickSymbol();
-         newS += " / " + this.getName();
-         newS += " / $" + (this.getSharePrice() +" / ");
+         newS += " , " + this.getName();
+         newS += " , $" + (this.getSharePrice() +" , ");
+         if(this.getAcquiredShares() != 0.0){
+        	 newS += "$" + (this.getAcquiredShares() +" , ");
+         }
+         if(this.getDate() != null){
+        	 newS += (this.getDate() +" , ");
+         }
          
          ArrayList<String> sectors = this.getIndexOrSec();
          
          if(!sectors.isEmpty()) {
             
             for(String o: sectors){
-               newS += o + "/ ";
+               newS += o + ", ";
             }
          }
          
+         newS += "\n";
          newS = newS.substring(0, newS.length()-2);
          return newS;
 	}
+	
+
 }
