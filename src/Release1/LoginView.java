@@ -138,8 +138,11 @@ public class LoginView extends View {
 						PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("users.txt", true)));
 						out.println(tempName + "," + tempPassword);
 						out.close();
+						File newFile = new File(tempName+".txt");
+						newFile.createNewFile();
 						JOptionPane.showMessageDialog(null,
 								"Your account has been created. Please login with your new credentials.");
+						
 					} else {
 
 						JOptionPane.showMessageDialog(null,
