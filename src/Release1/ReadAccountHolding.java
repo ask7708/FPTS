@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Arsh
  *
  */
-public class ReadAccountHolding implements ReadHoldingsStrategy {
+public class ReadAccountHolding extends ReadHoldingsStrategy {
 
 	@Override
 	public Holdings readHolding(String[] temp) {
