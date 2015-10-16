@@ -1,29 +1,16 @@
 package Release1;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Login {
-	
-	
-	
-	public Login(){
 		
-		
-	}
+	public Login(){}
 	
 	public static void main(String[] args) throws FileNotFoundException{
-		
-	   // Scanner input = new Scanner(System.in);
-		//String contents = FileUtils.readFileToString(new File("path/to/your/file.txt"));
-
-
- 
+		 
         String name = "itnks";
         String pass = "12345";
         

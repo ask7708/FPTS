@@ -1,23 +1,11 @@
 package Release1;
 
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Stack;
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public class ViewSelector extends JFrame {
-
-//   Container c = testButton;
-//
-//   while(c.getParent() != null)
-//       c = c.getParent();
-//
-//   ViewSelector vs = (ViewSelector)c;
-//   vs.makeTransition("REGISTER");
    
-//	private Portfolio portfolio;
-	private View currentView;
-//	private PortfolioController portCont;
+   private static final long serialVersionUID = 1L;
+   private View currentView;
 		
 	public ViewSelector() {
 		
@@ -26,52 +14,13 @@ public class ViewSelector extends JFrame {
 	   setTitle("Financial Portfolio Tracking System - Login");
 
 	}
-	
-	/*
-	public void makeTransition(String viewType) {
-	   
-
-	   currentView.hideScreen();
-	   
-	   switch(viewType) {
-	   
-	      case "LOGIN":
-	         setCurrent(new LoginView());
-	         break;
-	      case "SIMULATION":
-	         setCurrent(new SimulatorView(new Simulator(portfolio)));
-	         break;
-	      case "REGISTER":
-	         setCurrent(new RegisterView());
-	         break;
-	      default:
-	         setCurrent(new DashboardView());
-	         break;
-	   }
-	}*/
-	
-//	public void makeTransition(String viewType, User someUser) {
-//		   
-//
-//		   currentView.hideScreen();
-//		   
-//		   switch(viewType) {
-//		   
-//		      case "LOGIN":
-//		         setCurrent(new LoginView());
-//		         break;
-//		      case "SIMULATION":
-//		         setCurrent(new SimulatorView(new Simulator(portfolio)));
-//		         break;
-//		      case "REGISTER":
-//		         setCurrent(new RegisterView());
-//		         break;
-//		      default:
-//		         setCurrent(new DashboardView(someUser));
-//		         break;
-//		   }
-//		}
-	
+		
+	/**
+	 * Transitions to a different View object when moving to a different part
+	 * of the application 
+	 * @param viewType the type of view to transition to
+	 * @param data any data that may be necessary for the View
+	 */
 	public void makeTransition(String viewType, Object data) {
 	   
 	   currentView.hideScreen();
@@ -108,6 +57,10 @@ public class ViewSelector extends JFrame {
 	   }
 	}
 	
+	/**
+	 * Sets the passed in View object as the current View the application is to use 
+	 * @param obj the selected View
+	 */
 	public void setCurrent(View obj) {
 	   
 	   this.currentView = obj;

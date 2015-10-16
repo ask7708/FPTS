@@ -1,13 +1,10 @@
 package Release1;
 
-import java.awt.Font;
-import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public abstract class View implements Observer {
-
 
 	/**
 	 * the container holding everything (kind of represents the view)
@@ -33,9 +30,9 @@ public abstract class View implements Observer {
 
 	public abstract void getData(Object sim);
 	
-	// may be necessary to have all views to be set up in a default
-	// kind of way (leaving blank for now until we know what should be set
-	// for all Views when they are instantiated
+	/**
+	 * Constructor for a View object
+	 */
 	public View() {
 
 		this.screen = new JPanel();

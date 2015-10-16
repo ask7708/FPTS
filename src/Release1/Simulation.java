@@ -1,6 +1,5 @@
 package Release1;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class Simulation {
@@ -80,61 +79,69 @@ public class Simulation {
       }      
    }
    
+   /**
+    * Returns the day the simulation was started
+    * @return the start date
+    */
    public LocalDate getStartDate() { return this.startDate; }
    
+   /**
+    * Returns the day the simulation ended
+    * @return the end date
+    */
    public LocalDate getEndDate() { return this.endDate; }
    
    /**
-    * 
-    * @return
+    * Returns the type of simulation
+    * @return the simulation type (BULL, BEAR, or NONE)
     */
    public SimulationType getSimType() { return this.simType; }
    
    /**
-    * 
-    * @return
+    * Return the type of time interval chosen
+    * @return the interval type (DAY, MONTH, or YEAR)
     */
    public Interval getIntType() { return this.interval; }
    
    /**
-    * 
-    * @return
+    * Returns the percentage for the simulation given by the user
+    * @return the annual percentage
     */
    public double getPercent() { return this.percentage; }
    
    /**
-    * 
-    * @return
+    * Returns the number of time intervals given by the user
+    * @return the number of steps chosen
     */
    public int getAmount() { return this.amount; }
    
    /**
-    * 
-    * @param pVal
+    * Sets the simulation's portfolio value before the simulation starts
+    * @param pVal the portfolio value before starting the simulation
     */
    public void setOldPVal(double pVal) { this.pValBefore = pVal; }
    
    /**
-    * 
-    * @param pVal
+    * Sets the simulation's portfolio value after the simulation ends
+    * @param pVal the portfolio value after the simulation ends
     */
    public void setNewPVal(double pVal) { this.pValAfter = pVal; }
    
    /**
-    * 
-    * @return
+    * Returns the simulation's portfolio value before the simulation starts
+    * @return the portfolio value before starting the simulation
     */
    public double getOldPVal() { return this.pValBefore; }
    
    /**
-    * 
-    * @return
+    * Returns the simulation's portfolio value after the simulation ends
+    * @return the portfolio value after the simulation ends
     */
    public double getNewPVal() { return this.pValAfter; }
    
    /**
-    * 
-    * @param holding
+    * Adds the increase/decrease of the Equity being simulated 
+    * @param holding the Equity being affected
     */
    public void addInterestEarned(Equity holding) {
       

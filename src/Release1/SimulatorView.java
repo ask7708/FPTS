@@ -174,32 +174,9 @@ public class SimulatorView extends View {
 	   screen.add(simTableContainer);
 	   
 	   screen.setSize(200, 600);	
-	   screen.setVisible(true);
-	      
-
-	      	 
-		
+	   screen.setVisible(true);		
 	}
-			
-	public static void main(String[] args) {
-	      User me = new User("dxr5716", "me");
-	      
-	      Portfolio portfolio = new Portfolio(me);
-	       
-	      Equity e1 = new Equity("GOOG", "Google Inc.", 100.00);
-	      e1.setAcquiredShares(50);
-	      Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
-	      e2.setAcquiredShares(20);
-	      
-	      portfolio.addEquity(e1);
-	      portfolio.addEquity(e2);
-	      
-	      //Simulator simulator = new Simulator();
-	      
-	      SimulatorView ex = new SimulatorView();
-	      ex.showScreen();
-	}
-	
+				
 	@Override
 	public void update(Observable o, Object arg) {
 
@@ -240,7 +217,6 @@ public class SimulatorView extends View {
 	      reset1.setEnabled(false);
 	      resetAll.setEnabled(false);
 	   }
-	   // The view will be updated 
 	}
 	
    @Override
