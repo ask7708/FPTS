@@ -21,7 +21,7 @@ public class ViewSelector extends JFrame {
 		
 	public ViewSelector() {
 		
-		setSize(800, 500);
+		setSize(800, 800);
 		setVisible(true);
 	   setTitle("Financial Portfolio Tracking System - Login");
 
