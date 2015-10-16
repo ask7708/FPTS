@@ -57,6 +57,21 @@ public class Market {
 		
 	}
 	
+	public Equity getEquity(String tickSymbol){
+		
+		
+		for(int i = 0; i<marketEquities.size(); i++){
+			
+			if(marketEquities.get(i).getTickSymbol().equals(tickSymbol)){
+				
+				return marketEquities.get(i);
+			}
+			
+		}
+		
+		
+		return null;
+	}
 	
 	/*****TEST*************/
 	public static void main(String[] args){

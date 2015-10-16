@@ -88,7 +88,7 @@ public class ReadFile {
 		
 		ReadFile rf;
 		try {
-			rf = new ReadFile("data.txt");
+			rf = new ReadFile("itnks.txt");
 			System.out.println(rf.getOwnedEquities().toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
