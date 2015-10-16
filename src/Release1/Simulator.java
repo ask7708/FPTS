@@ -107,7 +107,7 @@ public class Simulator extends Observable {
 
          String newS = new String();
          newS += simulations.get(i).getSimType().toString();
-         newS += " / " + simulations.get(i).getAmount() + " / ";
+         newS += " / " + simulations.get(i).getAmount() + " ";
 
          switch(simulations.get(i).getIntType()) {
 
