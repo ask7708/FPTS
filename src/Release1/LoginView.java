@@ -139,9 +139,12 @@ public class LoginView extends View {
 						out.println(tempName + "," + tempPassword);
 						out.close();
 						File newFile = new File(tempName+".txt");
+						if(!newFile.exists()){
 						newFile.createNewFile();
+						}
 						JOptionPane.showMessageDialog(null,
 								"Your account has been created. Please login with your new credentials.");
+						
 						
 					} else {
 
