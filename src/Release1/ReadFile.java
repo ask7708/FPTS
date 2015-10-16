@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ReadFile {
 	/**
@@ -88,7 +86,7 @@ public class ReadFile {
 		
 		ReadFile rf;
 		try {
-			rf = new ReadFile("itnks.txt");
+			rf = new ReadFile("data.txt");
 			System.out.println(rf.getOwnedEquities().toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

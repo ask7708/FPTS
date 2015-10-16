@@ -3,7 +3,6 @@ package Release1;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -15,14 +14,11 @@ import java.io.PrintWriter;
 import java.util.Observable;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
 
 public class LoginView extends View {
 
@@ -138,14 +134,8 @@ public class LoginView extends View {
 						PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("users.txt", true)));
 						out.println(tempName + "," + tempPassword);
 						out.close();
-						File newFile = new File(tempName+".txt");
-						if(!newFile.exists()){
-						newFile.createNewFile();
-						}
 						JOptionPane.showMessageDialog(null,
 								"Your account has been created. Please login with your new credentials.");
-						
-						
 					} else {
 
 						JOptionPane.showMessageDialog(null,
@@ -184,13 +174,6 @@ public class LoginView extends View {
 
 	}
 	
-	
-	public static void main(String[] args) {
-
-		LoginView login = new LoginView();
-		login.showScreen();
-	}
-
 
    @Override
    public void update(Observable o, Object arg) {
@@ -199,6 +182,10 @@ public class LoginView extends View {
    }
 
    @Override
+   /**
+    * Retrieves any relevant data passed to this View by
+    * ViewSelector and takes it in as necessary
+    */
    public void getData(Object sim) {
       // TODO Auto-generated method stub
       

@@ -38,16 +38,22 @@ public class Equity implements Holdings {
 	 */
 	private double eqPrice;
 	
+	/**
+	 * The date the Equity was acquired
+	 */
 	private String date;
 	
+	/**
+	 * A stack used to simulate price changes
+	 */
 	private Stack<Double> priceChanges;
 	
 	/**
-	 * The non-default constructor. Creates an equity with a name
-	 * and ticker symbol.
-	 * 
-	 * @param name
-	 * @param tickSymbol
+	 * Represents an Equity object passing in a company's ticker symbol,
+	 * the company's name, and the price per share
+	 * @param tickSymbol the company's ticker symbol
+	 * @param name the company's name
+	 * @param eqPrice the price per share of the company
 	 */
 	protected Equity(String tickSymbol, String name, double eqPrice ){
 		
@@ -63,7 +69,6 @@ public class Equity implements Holdings {
 
 	/**
 	 * Returns the name of the Holding
-	 * 
 	 * @return name
 	 */
 	protected String getName(){
@@ -73,7 +78,6 @@ public class Equity implements Holdings {
 	
 	/**
 	 * Returns the ticker symbol of an equity
-	 * 
 	 * @return tickSymbol
 	 */
 	protected String getTickSymbol(){
@@ -84,7 +88,6 @@ public class Equity implements Holdings {
 	
 	/**
 	 * Sets the name of the Holding
-	 * 
 	 * @return name
 	 */
 	protected void setName(String name){
@@ -94,7 +97,6 @@ public class Equity implements Holdings {
 	
 	/**
 	 * Sets the ticker symbol of an equity
-	 * 
 	 * @return tickSymbol
 	 */
 	protected void setTickSymbol(String tSymbol){
@@ -103,9 +105,9 @@ public class Equity implements Holdings {
 		
 	}
 	
-		/**
+	/**
 	 * Gets the price of the market 
-	 * @return
+	 * @return the price per share
 	 */
 	public double getSharePrice() {
 		return eqPrice;
@@ -121,7 +123,7 @@ public class Equity implements Holdings {
 
 	/**
 	 * Return the complete array list of index or sectors
-	 * @return
+	 * @return a list of the equity's market indices and sectors (if applicable)
 	 */
 	public ArrayList<String> getIndexOrSec() {
 		return this.indexOrSec;
@@ -129,8 +131,7 @@ public class Equity implements Holdings {
 
 	/**
 	 * Add a new index or sector
-	 * 
-	 * @param indexOrSec
+	 * @param indexOrSec the market sector or index
 	 */
 	public void addIndexOrSec(String indexOrSec) {
 		this.indexOrSec.add(indexOrSec);
@@ -138,7 +139,7 @@ public class Equity implements Holdings {
 
 	/**
 	 * Returns the number of shares acquired
-	 * @return
+	 * @return the number of acquired shares
 	 */
 	public double getAcquiredShares() {
 		return acquiredShares;
@@ -162,7 +163,7 @@ public class Equity implements Holdings {
 	
 	/**
 	 * Used to add a price change to its Stack 
-	 * @param newPrice
+	 * @param newPrice the new price as a result of a simulation
 	 */
 	public void addPriceChange(double newPrice) {
 	   
@@ -186,7 +187,7 @@ public class Equity implements Holdings {
 	 * Used to get the price per share of an Equity in the simulator
 	 * (It's safe enough that it won't break and would return the Equity's initial price
 	 * if called outside of the simulator)
-	 * @return
+	 * @return either the initial price or the newly made simulation price
 	 */
 	public double getSimulationPrice() {
 	   Double simPrice = new Double(eqPrice);
@@ -202,33 +203,31 @@ public class Equity implements Holdings {
 	
 	/**
 	 * Sets the number of shares acquired
-	 * @param acquiredShares
+	 * @param acquiredShares the new amount of acquried shares
 	 */
 	public void setAcquiredShares(double acquiredShares) {
 		this.acquiredShares = acquiredShares;
 	}
 	
+	/**
+	 * Sets the date the Equity was acquired
+	 * @param date the new acquired date
+	 */
 	public void setDate(String date){
 		this.date = date;
 	}
 	
+	/**
+	 * Returns the date the Equity was acquired
+	 * @return the date acquired
+	 */
 	public String getDate(){
 		return this.date;
 	}
-	
-	public Equity findEquity(String marketFile, String tickSymbol){
 		
-		
-		
-		
-		
-		return null;
-	}
-	
-	
 	/**
 	 * Creates a toString method to print out an Equity Object
-	 * 
+	 * @param the String representation of Equity
 	 */
 	public String toString(){
 		
@@ -256,6 +255,4 @@ public class Equity implements Holdings {
          newS = newS.substring(0, newS.length()-2);
          return newS;
 	}
-	
-
 }

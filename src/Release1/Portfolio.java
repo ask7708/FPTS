@@ -1,18 +1,14 @@
 package Release1;
 
-import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 /**
  * 
@@ -50,24 +46,7 @@ public class Portfolio extends Observable {
    public String getUserFName() { return user.getFirstName(); }
    
    public String getUserLName() { return user.getLastName(); } 
-   
-//   /**
-//    * Returns a deep copy of the holding the portfolio has 
-//    * (I went with a copy so that holdings of the portfolio aren't affected when
-//    * simulations are being done)
-//    * @return a copy of the portfolio's holdings
-//    */
-//   public ArrayList<Equity> getHoldings() { 
-//      
-//      ArrayList<Equity> copy = new ArrayList<Equity>(holdings); 
-//      
-//      for(Equity obj: copy) {
-//         obj.putSimulationOn();
-//      }
-//      
-//      return copy;
-//   }
-   
+      
    public ArrayList<Equity> getHoldingsNew() { return this.ownedEquities; }
       
    /**
@@ -75,10 +54,6 @@ public class Portfolio extends Observable {
     * @return a copy of the portfolio's accounts
     */
    public ArrayList<Account> getAccounts() { return new ArrayList<Account>(accounts); }
-   
-   public void addAccounts(Account newAccount) { accounts.add(newAccount); }
-   
-   
    
    public void addEquity(Equity holding) { ownedEquities.add(holding); }
    
@@ -202,76 +177,34 @@ public class Portfolio extends Observable {
       	line = line.replace(", ", "");
       	temp = line.split(",");
       	ReadHoldingsContext readOwnedEquity = new ReadHoldingsContext(new ReadOwnedEquities());
-      	ReadHoldingsContext readOwnedAccount = new ReadHoldingsContext(new ReadAccountHolding());
-      	System.out.println(temp[0]);
+      	
       	if(temp[0].equals("!OWNED")){
       			Equity OwnedEquityInfo = (Equity) readOwnedEquity.executeStrategy(temp);
       			ownedEquities.add(OwnedEquityInfo);
       		}
-      	else if(temp[0].equals("!MM") || temp[0].equals("!BANK") ){
-      		Account ownedAccount = (Account) readOwnedAccount.executeStrategy(temp);
-      		accounts.add(ownedAccount);
-      		
-      	}
       		
       	}
 		   
 		dataRead.close();
 	   
 	   
-}
+	  }
    		
-   public boolean checkAccount(String accountName){
-	   
-	   ReadHoldingsContext rhc = new ReadHoldingsContext(new ReadAccountHolding());
-	   
-	   accountName = accountName.replace(" ", "");
-	    File data = new File(user.getUsername()+".txt");
-		Scanner dataRead = null;
-		try {
-			dataRead = new Scanner(data);
-			String line;
-			String[] temp;
-			
-			while (dataRead.hasNextLine())
-			{
-	     	line = dataRead.nextLine();
-	     	line = line.replace("\"", "");
-	     	line = line.replace(", ", "");
-	     	temp = line.split(",");
-	     	System.out.println(temp[1]);
-	     	if(temp[1].equals(accountName)){
-	     			return true;
-	     		}
-	     		
-	     	}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		   
-		dataRead.close();
-	    
-	   return false;
-   }
-   
-   
 	/*************TEST*********************/
    public static void main(String[] args){
 	   
-	   User newUser = new User("arsh","123");
+	   User newUser = new User("itnks","123");
 	   Portfolio portObj = new Portfolio(newUser);
-	   portObj.viewOwnedEquities();
-	   System.out.println(portObj.getAccounts().toString());
-	   System.out.println(portObj.checkAccount("ArshBank "));
+	   
+	   portObj.importEquity(new File("data.txt"));
+	  // portObj.viewOwnedEquities();
+	 //  System.out.println(portObj.getHoldingsNew().toString());
 	   
 	   
    }
    
    
-}
+   }
    
    
    

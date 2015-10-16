@@ -2,9 +2,6 @@
  * 
  */
 package Release1;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * @author Arsh
@@ -123,7 +120,10 @@ public abstract class Account implements Holdings {
 		this.date = date;
 	}
 	
-	
+	/**
+	 * Returns a String representation of the class in this form:
+	 * accountName, balance, dateAdded
+	 */
 	public String toString(){
 		
 		String newS = new String();

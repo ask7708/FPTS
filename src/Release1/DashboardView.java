@@ -3,7 +3,6 @@ package Release1;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,56 +11,61 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Observable;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class DashboardView extends View {
 
-	/**
-	 * Creates the application's dashboard view
-	 * 
-	 * @param portfolio
-	 *            the user's portfolio
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel cardPanel, dashPanel, accountPanel, mainPanel, portfolioPanel, holdingsPanel;
 	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel, addHoldingsLabel;
-	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, addHoldingsButton;
+	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, simulatorButton, addHoldingsButton;
+	private CardLayout cardLayout = new CardLayout();
 	private Portfolio portObj;
-	private Market markObj;
-	JFrame frame, marketFrame;
-	
+	private JFrame frame;
 	private User someUser;
 	private Portfolio portfolio;
-	Equity pickedEquity = null;
 
+	/**
+	 * Creates the application's dashboard page 
+	 */
 	public DashboardView() {
 
 		super();
 		buildJFrame();
 	}
 
-
+	/**
+	 * Returns the User object after a user has logged 
+	 * into the application
+	 * @return the user 
+	 */
 	public User getUserAfterLogin() {
 
 		return this.someUser;
 	}
 
+	/**
+	 * Creates the view
+	 */
 	public void buildJFrame() {
 
 		cardPanel = new JPanel();
 		mainPanel = new JPanel();
-		//cardPanel.setLayout(cardLayout);
+		cardPanel.setLayout(cardLayout);
 
 		dashPanel = new JPanel();
 		accountPanel = new JPanel();
@@ -69,20 +73,20 @@ public class DashboardView extends View {
 		holdingsPanel = new JPanel();
 
 		dahboardLabel = new JLabel("");
-		//accountLabel = new JLabel("Account Details");
-		//portfolioLabel = new JLabel("Manage Your Portfolio");
-		//holdingsLabel = new JLabel("Manage Your Holdings");
-		//addHoldingsLabel = new JLabel("Add equity");
+		accountLabel = new JLabel("Account Details");
+		portfolioLabel = new JLabel("Manage Your Portfolio");
+		holdingsLabel = new JLabel("Manage Your Holdings");
+		addHoldingsLabel = new JLabel("Add equity");
 
-		//dashPanel.add(dahboardLabel);
-		//accountPanel.add(accountLabel);
-		//portfolioPanel.add(portfolioLabel);
-		//holdingsPanel.add(holdingsLabel);
+		dashPanel.add(dahboardLabel);
+		accountPanel.add(accountLabel);
+		portfolioPanel.add(portfolioLabel);
+		holdingsPanel.add(holdingsLabel);
 
-		//cardPanel.add(dashPanel, "1");
-		//cardPanel.add(accountPanel, "2");
-		//cardPanel.add(portfolioPanel, "3");
-		//cardPanel.add(holdingsPanel, "4");
+		cardPanel.add(dashPanel, "1");
+		cardPanel.add(accountPanel, "2");
+		cardPanel.add(portfolioPanel, "3");
+		cardPanel.add(holdingsPanel, "4");
 
 		dashboardButton = new JButton("Dash Board");
 
@@ -93,23 +97,23 @@ public class DashboardView extends View {
 		dashboardButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				//cardLayout.show(cardPanel, "1");
+				cardLayout.show(cardPanel, "1");
 			}
 		});
-		
-		accountButton = new JButton("View Your Accounts");
+		accountButton = new JButton("View Your Account");
 		accountButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				//cardLayout.show(cardPanel, "2");
+				cardLayout.show(cardPanel, "2");
 			}
 		});
 
 		portfolioButton = new JButton("View Your Owned Equities");
+
 		portfolioButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				//cardLayout.show(cardPanel, "3");
+				cardLayout.show(cardPanel, "3");
 				portObj = new Portfolio(getUserAfterLogin());
 				portObj.viewOwnedEquities();
 
@@ -228,7 +232,7 @@ public class DashboardView extends View {
 		holdingsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				//cardLayout.show(cardPanel, "4");
+				cardLayout.show(cardPanel, "4");
 				/**
 				 * Show the list of holdings the user currently has
 				 * 
@@ -237,117 +241,40 @@ public class DashboardView extends View {
 			}
 		});
 
-		addHoldingsButton = new JButton("Purchase an Equity");
+		addHoldingsButton = new JButton("Add an equity");
 		addHoldingsButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
-				marketFrame = new JFrame("Equity Market");
-				portObj = new Portfolio(getUserAfterLogin());
-				markObj = new Market();
-				markObj.viewMarketEquities();
-				// Creates a menubar for a JFrame
-				JMenuBar menuBar = new JMenuBar();
+				int selectedOption = JOptionPane.showConfirmDialog(null, "Is your holding purchased from FPTS?",
+						"Choose", JOptionPane.YES_NO_OPTION);
+				if (selectedOption == JOptionPane.NO_OPTION) {
 
-				String col[] = { "Tick Symbol", "Name", "Price" };
-				
-				
-				/*
-				 * Table is made with 0 rows because we wanted add from our list
-				 * of equities
-				 */
-				DefaultTableModel tableMarketModel = new DefaultTableModel(col, 0);
+				} else {
 
-				JTable marketTable = new JTable(tableMarketModel);
-
-				for (int i = 0; i < markObj.getMarketEquities().size(); i++) {
-					String tickSym = markObj.getMarketEquities().get(i).getTickSymbol();
-					String name = markObj.getMarketEquities().get(i).getName();
-					double price = markObj.getMarketEquities().get(i).getSharePrice();
-					//String date = portObj.getHoldingsNew().get(i).getDate();
-					// int draws = portObj.getHoldingsNew().get(i).getDraws();
-
-					Object[] data = { tickSym, name, price};
-
-					tableMarketModel.addRow(data);
-
+					JOptionPane.showMessageDialog(null, "The system does not currently support this Feature.");
 				}
-
-				// Add the menubar to the frame
-				marketFrame.setJMenuBar(menuBar);
-
-				// Define and add two drop down menu to the menubar
-				JMenu fileMenu = new JMenu("Options");
-				menuBar.add(fileMenu);
-				JMenuItem buyEquity = new JMenuItem("Buy Equity");
-				
-				
-				buyEquity.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String eqToBuy = JOptionPane.showInputDialog(marketFrame,
-								"Enter the ticker symbol of the equity you'd like to buy");
-						double priceOfEquity = 0.0;
-						//double amountBought = 0.0;
-						String AccountName = "";
-						
-						if(eqToBuy != null){
-							pickedEquity = markObj.getEquity(eqToBuy);
-							if( pickedEquity != null){
-								PrintWriter outExport;
-								try {
-									
-									LocalDate date = LocalDate.now();
-									System.out.println(portObj.getUsername()+".txt");
-									PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(portObj.getUsername()+".txt", true)));
-									out.println("\"!OWNED\",\""+pickedEquity.getTickSymbol()+"\",\""+pickedEquity.getName()
-									+"\",\""+pickedEquity.getSharePrice()+"\","+"\"1.0\""+",\""+date.getYear()+""
-											+date.getMonthValue()+""+date.getDayOfMonth()+"\","+"\"NULL\"");
-									out.close();
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								
-								
-								
-								
-								 
-								
-							}
-							
-							
-							
-						
-						}else{
-							eqToBuy = JOptionPane.showInputDialog(frame,
-									"Enter the ticker symbol of the equity you'd like to buy.");
-						}
-					}
-				});
-
-				
-				
-				
-				
-				
-				fileMenu.add(buyEquity);
-
-
-				JPanel panel = new JPanel();
-				panel.setLayout(new BorderLayout());
-
-				JScrollPane tableContainer = new JScrollPane(marketTable);
-				
-				panel.add(tableContainer, BorderLayout.CENTER);
-				marketFrame.getContentPane().add(panel);
-
-				marketFrame.pack();
-				marketFrame.setVisible(true);
-				
 
 			}
 		});
 
+	    simulatorButton = new JButton("Create Simulations");
+	      simulatorButton.addActionListener(new ActionListener() {
+	         
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	           
+	            Container c = simulatorButton;
+	            
+	            while(c.getParent() != null)
+	               c = c.getParent();
+	            
+	            ViewSelector vs = (ViewSelector)c;
+	            vs.makeTransition("SIMULATION", getUserAfterLogin().getUsername());
+	            
+	         }
+	      });
+	      
 		/**
 		 * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
 		 * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
@@ -359,18 +286,27 @@ public class DashboardView extends View {
 		mainPanel.add(portfolioButton);
 		mainPanel.add(holdingsButton);
 		mainPanel.add(addHoldingsButton);
+		mainPanel.add(simulatorButton);
 		this.screen.add(cardPanel, BorderLayout.NORTH);
 		this.screen.add(mainPanel, BorderLayout.SOUTH);
 		this.screen.setSize(600, 600);
 	}
 
 	@Override
+	/**
+	 * Updates the view based on changes from the observed
+	 * object
+	 */
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	/**
+	 * Retrieves any relevant data passed to this View by
+	 * ViewSelector and takes it in as necessary
+	 */
 	public void getData(Object sim) {
 
 		if (sim instanceof User) {
