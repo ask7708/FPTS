@@ -62,7 +62,7 @@ public class Simulation {
       this.simType = type;
       this.amount = length;
       this.interval = iType;
-      this.percentage = percent / 100;
+      this.percentage = percent / 100.0;
       
       this.startDate = startDate;
       

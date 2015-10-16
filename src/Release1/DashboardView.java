@@ -35,7 +35,7 @@ public class DashboardView extends View {
 	private static final long serialVersionUID = 1L;
 	private JPanel cardPanel, dashPanel, accountPanel, mainPanel, portfolioPanel, holdingsPanel;
 	private JLabel dahboardLabel, accountLabel, portfolioLabel, holdingsLabel, addHoldingsLabel;
-	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, addHoldingsButton;
+	private JButton dashboardButton, accountButton, portfolioButton, holdingsButton, simulatorButton, addHoldingsButton;
 	private CardLayout cardLayout = new CardLayout();
 	Portfolio portObj;
 	JFrame frame;
@@ -126,10 +126,27 @@ public class DashboardView extends View {
 				 * Show the list of holdings the user currently has
 				 * 
 				 */
-
+				  
 			}
 		});
 
+		simulatorButton = new JButton("Create Simulations");
+		simulatorButton.addActionListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+           
+            Container c = simulatorButton;
+            
+            while(c.getParent() != null)
+               c = c.getParent();
+            
+            ViewSelector vs = (ViewSelector)c;
+            vs.makeTransition("SIMULATION", getUserAfterLogin().getUsername());
+            
+         }
+      });
+      
 		/**
 		 * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
 		 * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
@@ -140,6 +157,7 @@ public class DashboardView extends View {
 		mainPanel.add(accountButton);
 		mainPanel.add(portfolioButton);
 		mainPanel.add(holdingsButton);
+		mainPanel.add(simulatorButton);
 		this.screen.add(cardPanel, BorderLayout.NORTH);
 		this.screen.add(mainPanel, BorderLayout.SOUTH);
 		this.screen.setSize(600, 600);
@@ -347,6 +365,23 @@ public class DashboardView extends View {
 			}
 		});
 
+	    simulatorButton = new JButton("Create Simulations");
+	      simulatorButton.addActionListener(new ActionListener() {
+	         
+	         @Override
+	         public void actionPerformed(ActionEvent e) {
+	           
+	            Container c = simulatorButton;
+	            
+	            while(c.getParent() != null)
+	               c = c.getParent();
+	            
+	            ViewSelector vs = (ViewSelector)c;
+	            vs.makeTransition("SIMULATION", getUserAfterLogin().getUsername());
+	            
+	         }
+	      });
+	      
 		/**
 		 * Date date = new Date(; SimpleDateFormat sdf = new SimpleDateFormat(
 		 * "yyyy/MM/dd HH:mm"); JLabel dateNow = new JLabel(sdf.format(date));
@@ -358,6 +393,7 @@ public class DashboardView extends View {
 		mainPanel.add(portfolioButton);
 		mainPanel.add(holdingsButton);
 		mainPanel.add(addHoldingsButton);
+		mainPanel.add(simulatorButton);
 		this.screen.add(cardPanel, BorderLayout.NORTH);
 		this.screen.add(mainPanel, BorderLayout.SOUTH);
 		this.screen.setSize(600, 600);

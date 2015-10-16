@@ -1,5 +1,6 @@
 package Release1;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -8,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Scanner;
 import java.util.Stack;
 
 import javax.swing.text.NumberFormatter;
@@ -30,26 +32,46 @@ public class Simulator extends Observable {
       
       this.simulations = new Stack<Simulation>();
       this.username = username;
+      this.holdings = new ArrayList<Equity>();
+      this.currentDate = LocalDate.now();
+      this.portfolioVal = 0;
 
       String fName = username.concat(".txt");
+      
+      //
+      File data = new File(fName);
+      Scanner dataRead = null;
       try {
-         
-         ReadFile fileReader = new ReadFile(fName);
-         this.holdings = fileReader.getOwnedEquities();
-         
-         for(Equity obj: holdings)
-              obj.putSimulationOn();
-         
-         this.accounts = fileReader.getAllAccounts();
-
-      } catch(FileNotFoundException ex) {
-         
-         System.err.println("The file is not found");
-         
+         dataRead = new Scanner(data);
+      } catch (FileNotFoundException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
       }
       
-      this.portfolioVal = 0;
-      this.currentDate = LocalDate.now();
+      String line;
+      String[] temp;
+      
+      while (dataRead.hasNextLine())
+      {
+         line = dataRead.nextLine();
+         line = line.replace("\"", "");
+         line = line.replace(", ", "");
+         temp = line.split(",");
+         ReadHoldingsContext readOwnedEquity = new ReadHoldingsContext(new ReadOwnedEquities());
+         
+         if(temp[0].equals("!OWNED")){
+               Equity OwnedEquityInfo = (Equity) readOwnedEquity.executeStrategy(temp);
+               holdings.add(OwnedEquityInfo);
+            }
+         
+            
+         }
+         
+      dataRead.close();
+      
+      for(Equity obj: holdings)
+         obj.putSimulationOn();
+      
    }
    
    /**
@@ -179,10 +201,17 @@ public class Simulator extends Observable {
     */
    public void addNewSimulation(Simulation sim) {
       
+      System.out.println(this.countObservers());
       simulations.push(sim);
       
       for(Equity obj: this.holdings)
          sim.addInterestEarned(obj);
+      
+      setChanged();
+      notifyObservers();
+      System.out.println("Notifying observers");
+      System.out.println(this.countObservers());
+
    }
    
    public boolean removeOneSimulation() {
@@ -200,6 +229,9 @@ public class Simulator extends Observable {
          portfolioVal = undo.getOldPVal();
         
       for(Equity obj: this.holdings) { obj.removePriceChange(); }
+      
+      setChanged();
+      notifyObservers();
       
       return true;  
    }
