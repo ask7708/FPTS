@@ -174,13 +174,6 @@ public class LoginView extends View {
 
 	}
 	
-	
-	public static void main(String[] args) {
-
-		LoginView login = new LoginView();
-		login.showScreen();
-	}
-
 
    @Override
    public void update(Observable o, Object arg) {
@@ -189,6 +182,10 @@ public class LoginView extends View {
    }
 
    @Override
+   /**
+    * Retrieves any relevant data passed to this View by
+    * ViewSelector and takes it in as necessary
+    */
    public void getData(Object sim) {
       // TODO Auto-generated method stub
       

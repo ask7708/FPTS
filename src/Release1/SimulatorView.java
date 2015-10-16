@@ -16,7 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.*;
 
 public class SimulatorView extends View {
 
@@ -35,9 +34,8 @@ public class SimulatorView extends View {
    private JComboBox<String> iChoices = new JComboBox<String>(INTERVALTYPES);
    private JTextField stepsField, percentageField;
    
-    private Simulator simulator;
+   private Simulator simulator;
     
-
 	public SimulatorView() {
 		
 		super();
@@ -131,13 +129,11 @@ public class SimulatorView extends View {
 	   simForm.add(addNewSim);
 	   
 	   reset1 = new JButton("RESET ONE SIM");
-      //reset1.set;
       
       reset1.addActionListener(new ActionListener() {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-               
             simulator.removeOneSimulation();
          }
       });
@@ -151,7 +147,6 @@ public class SimulatorView extends View {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
             simulator.resetAll();
          }
       });
@@ -179,8 +174,6 @@ public class SimulatorView extends View {
 				
 	@Override
 	public void update(Observable o, Object arg) {
-
-	   System.out.println("Was update called? Yes it was");
 	   
 	   if(tableStructure.getRowCount() > 0) {
 	      for(int i = tableStructure.getRowCount()-1; i >= 0 ; i--)
@@ -220,6 +213,10 @@ public class SimulatorView extends View {
 	}
 	
    @Override
+   /**
+    * Retrieves any relevant data passed to this View by
+    * ViewSelector and takes it in as necessary
+    */
    public void getData(Object sim) {
       
       String pv = (String) sim;
