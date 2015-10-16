@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
 public class SimulatorView extends View {
 
@@ -34,12 +35,14 @@ public class SimulatorView extends View {
    private JComboBox<String> iChoices = new JComboBox<String>(INTERVALTYPES);
    private JTextField stepsField, percentageField;
    
-   private Simulator simulator;
-       	
-	public SimulatorView() {
+    private Simulator simulator;
+    
 
-	   super();
-	   this.simulator = null;
+	public SimulatorView() {
+		
+		super();
+		this.simulator = null;
+
 	   screen.setLayout(new FlowLayout());
 	   
 	   mChoices.setEditable(false);
@@ -172,8 +175,32 @@ public class SimulatorView extends View {
 	   
 	   screen.setSize(200, 600);	
 	   screen.setVisible(true);
-	}
+	      
+
+	      	 
 		
+	}
+			
+	public static void main(String[] args) {
+	      User me = new User("dxr5716", "me");
+	      
+	      Portfolio portfolio = new Portfolio(me);
+	       
+	      Equity e1 = new Equity("GOOG", "Google Inc.", 100.00);
+	      e1.setAcquiredShares(50);
+	      Equity e2 = new Equity("AAPL", "Apple Inc.", 500.00);
+	      e2.setAcquiredShares(20);
+	      
+	      portfolio.addEquity(e1);
+	      portfolio.addEquity(e2);
+	      
+	      //Simulator simulator = new Simulator();
+	      
+	      SimulatorView ex = new SimulatorView();
+	      ex.showScreen();
+	}
+	
+	@Override
 	public void update(Observable o, Object arg) {
 
 	   System.out.println("Was update called? Yes it was");
@@ -213,16 +240,15 @@ public class SimulatorView extends View {
 	      reset1.setEnabled(false);
 	      resetAll.setEnabled(false);
 	   }
+	   // The view will be updated 
 	}
 	
    @Override
    public void getData(Object sim) {
       
-      System.out.println("I am getting a new simulator now");
       String pv = (String) sim;
-      this.simulator = new Simulator(pv);
-      this.simulator.addObserver(this);
-      System.out.println(simulator.countObservers());
+      simulator = new Simulator(pv);
+      simulator.addObserver(this);
             
    }
 

@@ -3,6 +3,7 @@
  */
 package Release1;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -24,7 +25,7 @@ public abstract class Account implements Holdings {
 	/**
 	 * The date the type of account was added
 	 */
-	private LocalDate date;
+	private String date;
 	
 	/**
 	 * The account number for this account
@@ -44,11 +45,11 @@ public abstract class Account implements Holdings {
 	 * @param amount
 	 * @param date
 	 */
-	public Account(String accountName, double amount, LocalDate date, int accountNum, int routingNum){
+	public Account(String accountName, double amount, String date, int accountNum, int routingNum){
 		
 		this.accountName = accountName;
 		this.amount = amount;
-		this.setDate(date);
+		this.date="00000000";
 		this.accountNo = accountNum;
 		this.routingNo = routingNum;
 		
@@ -109,7 +110,7 @@ public abstract class Account implements Holdings {
 	 * 
 	 * @return date
 	 */
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
@@ -118,20 +119,31 @@ public abstract class Account implements Holdings {
 	 * 
 	 * @param date
 	 */
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
 	
-	/* Testing some methods within account class
-	 * ***DO NOT ERASE***
+	public String toString(){
+		
+		String newS = new String();
+        newS += this.getAccountName();
+        newS += " , " + this.getAmount();
+        newS += " , " + (this.getDate() +" , ");
+        newS += this.getDate();
+        
+        newS += "\n";
+        newS = newS.substring(0, newS.length()-2);
+        return newS;
+	}
+	
+	
+
 	public static void main(String args[]){
 		
-		
-		LocalDate randomDate = LocalDate.now();
-		System.out.println(randomDate.getMonth()+" "+randomDate.getDayOfMonth()+" "+randomDate.getYear());
-		
+		Account testAccount = new MarketAccount("ArshBank", 100.0, "20151013", 000000000, 000000000);
+		System.out.println(testAccount.toString());
 		
 	}
-	*/
+	
 }
