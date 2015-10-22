@@ -19,13 +19,27 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
-        Scene scene = new Scene(root);
+        this.primaryStage.setTitle("FPTS");
+    	showLogin();
+    	//showOther();
+    }
+    
+    public void showLogin() throws IOException{
+
+           Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
+           Scene scene = new Scene(root);
+           
+           this.primaryStage.setTitle("FPTS");
+           this.primaryStage.setScene(scene);
+           this.primaryStage.show();
         
+    }
+    public void showOther() throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("TheOtherScene.fxml"));
+        Scene scene = new Scene(root);
         this.primaryStage.setTitle("FPTS");
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
-        
     }
 
 
