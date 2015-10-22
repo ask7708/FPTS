@@ -1,5 +1,6 @@
 package ch.makery.login;
 
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import Release1.User;
 //import ch.makery.login.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import Release1.*;
 
 public class LoginOverviewController implements Initializable {
 
